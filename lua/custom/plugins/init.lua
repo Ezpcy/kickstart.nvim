@@ -22,30 +22,7 @@ return {
         }
       end
     },
-    {
-      'slugbyte/lackluster.nvim',
-      lazy = false,
-      priority = 1000,
-      config = function()
-        local lackluster = require 'lackluster'
-        lackluster.setup {
-          tweak_color = {
-            gray8 = '#7f7f7f',
-            lack = '#2E3440',
-          },
-          tweak_syntax = {
-            string = '#CD9177',
-            comment = '#8f8f8f',
-            keyword = '#68A891',
-          },
-          tweak_background = {
-            normal = 'default',
-          },
-        }
-        -- Setting one of the lackluster variants
-        vim.cmd.colorscheme 'lackluster-hack'
-      end,
-    },
+
 
     -- 2) Rust Tools & Crates
     {
@@ -106,7 +83,7 @@ return {
       dependencies = { 'copilot.lua' },
       config = function()
         require('copilot_cmp').setup {
-          suggestion = { enabled = false },
+          suggestion = { enabled = true },
           panel = { enabled = true },
         }
       end,
