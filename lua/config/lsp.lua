@@ -1,0 +1,59 @@
+-- ================================================
+-- LSP SETTINGS
+-- ================================================
+
+-- Additional servers you want to configure:
+
+-- Example: If you want to skip certain servers that your framework auto-installs:
+-- local servers_to_skip = { "rust_analyzer", "clangd" }
+
+-- You can override them or do your own setup
+-- If you do auto server setup, e.g. with 'mason-lspconfig', you can do something like:
+-- require("mason-lspconfig").setup {
+--   ensure_installed = { "denols", "tsserver", "rust_analyzer", ... }
+-- }
+
+---------------------------------
+-- Rust Tools Setup
+---------------------------------
+local mason_path = vim.fn.stdpath 'data' .. '/mason/'
+local codelldb_path = mason_path .. 'bin/codelldb'
+local liblldb_path = mason_path .. 'packages/codelldb/extension/lldb/lib/liblldb'
+local this_os = vim.loop.os_uname().sysname
+if this_os:find 'Windows' then
+  codelldb_path = mason_path .. 'packages\\codelldb\\extension\\adapter\\codelldb.exe'
+  liblldb_path = mason_path .. 'packages\\codelldb\\extension\\lldb\\bin\\liblldb.dll'
+else
+  liblldb_path = liblldb_path .. (this_os == 'Linux' and '.so' or '.dylib')
+end
+
+local rt_status_ok, rust_tools = pcall(require, 'rust-tools')
+if rt_status_ok then
+  rust_tools.setup {
+    tools = {
+      executor = require('rust-tools/executors').termopen,
+      reload_workspace_from_cargo_toml = true,
+      runnables = { use_telescope = true },
+      inlay_hints = {
+        auto = true,
+        show_parameter_hints = true,
+        parameter_hints_prefix = '<-',
+        other_hints_prefix = '=>',
+      },
+    },
+    dap = {
+      adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
+    },
+    server = {
+      on_attach = function(client, bufnr)
+        -- typical on_attach code here
+      end,
+      settings = {
+        ['rust-analyzer'] = {
+          lens = { enable = true },
+          checkOnSave = { enable = true, command = 'clippy' },
+        },
+      },
+    },
+  }
+end

@@ -80,6 +80,53 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    ---------------------------------
+    -- DAP Configuration Examples
+    ---------------------------------
+    -- 1) C++ with lldb-vscode
+    local dap = require('dap')
+
+    dap.adapters.lldb = {
+      type = 'executable',
+      command = '/run/current-system/sw/bin/lldb-vscode', -- Adjust your lldb path
+      name = 'lldb',
+    }
+    dap.configurations.cpp = {
+      {
+        name = 'Launch C++',
+        type = 'lldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+      },
+    }
+
+    -- 2) Python (if using debugpy)
+    dap.adapters.python = {
+      type = 'executable',
+      -- command = mason_path .. 'packages/debugpy/venv/bin/python',
+      args = { '-m', 'debugpy.adapter' },
+    }
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}',
+        pythonPath = function()
+          local handle = io.popen 'which python'
+          if handle then
+            local result = handle:read '*a'
+            handle:close()
+            return result:gsub('\n', '')
+          end
+          return 'python'
+        end,
+      },
+    }
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
