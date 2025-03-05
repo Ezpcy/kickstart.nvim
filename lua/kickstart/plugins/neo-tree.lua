@@ -15,6 +15,9 @@ return {
   },
   opts = {
     filesystem = {
+      visible = true, -- Show hidden files
+      hide_dotfiles = false, -- Do not hide dotfiles (e.g., .git, .config)
+      hide_gitignored = false,
       window = {
         mappings = {
           ['\\'] = 'close_window',

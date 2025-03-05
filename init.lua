@@ -5,10 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Import
-
-require('config.lsp')
-require('config.options')
-
+require 'config.options'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
@@ -41,6 +38,14 @@ end)
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Set tab size
+vim.opt.tabstop = 2 -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 2 -- Number of spaces for indentation
+vim.opt.expandtab = true -- Convert tabs to spaces
+
+-- Set wrap
+vim.opt.wrap = true
+
 -- Save undo history
 vim.opt.undofile = true
 
@@ -55,7 +60,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 250
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -109,12 +114,11 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Keybinds
-vim.api.nvim_set_keymap("n", "<m-d>", "<cmd>RustOpenExternalDocs<Cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<m-d>', '<cmd>RustOpenExternalDocs<Cr>', { noremap = true, silent = true })
 
-
-vim.api.nvim_set_keymap("n", "<C-w>", "<cmd>BufferKill<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-w>', '<cmd>BufferKill<CR>', { noremap = true, silent = true })
 -- Copilot stop
-vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>Copilot toggle<CR>", { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Copilot toggle<CR>', { noremap = true, silent = false })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -153,13 +157,13 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  require('custom.plugins.init'),
-  require('kickstart.plugins.lint'),
-  require('kickstart.plugins.debug'),
-  require('kickstart.plugins.indent_line'),
-  require('kickstart.plugins.neo-tree'),
-  require('kickstart.plugins.gitsigns'),
-  require('kickstart.plugins.autopairs'),
+  require 'custom.plugins.init',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.autopairs',
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -212,7 +216,7 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -258,7 +262,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
+        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
@@ -298,7 +302,6 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -406,7 +409,7 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -842,8 +845,6 @@ require('lazy').setup({
         vim.cmd.colorscheme 'lackluster-hack'
       end,
     },
-
-
   },
 
   -- Highlight todo, notes, etc in comments
@@ -963,12 +964,12 @@ require('lazy').setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- lackluster
-local lackluster = require("lackluster")
+local lackluster = require 'lackluster'
 
 local color = lackluster.color -- blue, green, red, orange, black, lack, luster, gray1-9
 
 -- !must called setup() before setting the colorscheme!
-lackluster.setup({
+lackluster.setup {
   -- You can overwrite the following syntax colors by setting them to one of...
   --   1) a hexcode like "#a1b2c3" for a custom color.
   --   2) "default" or nil will just use whatever lackluster's default is.
@@ -977,16 +978,16 @@ lackluster.setup({
     lack = '#2E3440',
   },
   tweak_syntax = {
-    string = "#CD9177",
+    string = '#CD9177',
     -- string = "#a1b2c3", -- custom hexcode
     -- string = color.green, -- lackluster color
-    string_escape = "default",
-    comment = "#8f8f8f",
-    builtin = "default", -- builtin modules and functions
-    type = "default",
-    keyword = "#68A891",
-    keyword_return = "default",
-    keyword_exception = "default",
+    string_escape = 'default',
+    comment = '#8f8f8f',
+    builtin = 'default', -- builtin modules and functions
+    type = 'default',
+    keyword = '#68A891',
+    keyword_return = 'default',
+    keyword_exception = 'default',
   },
   -- You can overwrite the following background colors by setting them to one of...
   --   1) a hexcode like "#a1b2c3" for a custom color
@@ -998,11 +999,10 @@ lackluster.setup({
     -- normal = '#a1b2c3',    -- hexcode
     -- normal = color.green,    -- lackluster color
     telescope = 'default', -- telescope
-    menu = 'default',      -- nvim_cmp, wildmenu ... (bad idea to transparent)
-    popup = 'default',     -- lazy, mason, whichkey ... (bad idea to transparent)
+    menu = 'default', -- nvim_cmp, wildmenu ... (bad idea to transparent)
+    popup = 'default', -- lazy, mason, whichkey ... (bad idea to transparent)
   },
-
-})
+}
 
 require('mason').setup {
   registries = {
@@ -1010,3 +1010,6 @@ require('mason').setup {
     'github:crashdummyy/mason-registry',
   },
 }
+
+require 'config.lsp'
+require 'custom.keybinds'
