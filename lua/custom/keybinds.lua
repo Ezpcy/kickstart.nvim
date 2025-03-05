@@ -1,5 +1,5 @@
 -- Toggleterm
-vim.keymap.set('n', '<Space>th', '<cmd>ToggleTerm direction=horizontal<cr>', opts)
+vim.keymap.set('n', '<C-Space>', '<cmd>ToggleTerm direction=horizontal<cr>', opts)
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- barbar
