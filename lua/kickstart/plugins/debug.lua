@@ -84,7 +84,7 @@ return {
     -- DAP Configuration Examples
     ---------------------------------
     -- 1) C++ with lldb-vscode
-    local dap = require('dap')
+    local dap = require 'dap'
 
     dap.adapters.lldb = {
       type = 'executable',

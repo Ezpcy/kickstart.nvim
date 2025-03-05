@@ -1,26 +1,26 @@
 return {
   {
     {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate", -- updates parsers automatically
+      'nvim-treesitter/nvim-treesitter',
+      build = ':TSUpdate', -- updates parsers automatically
       config = function()
-        require("nvim-treesitter.configs").setup {
+        require('nvim-treesitter.configs').setup {
           ensure_installed = {
-            "bash",
-            "c",
-            "cpp",
-            "css",
-            "javascript",
-            "lua",
-            "python",
-            "rust",
-            "tsx",
-            "typescript",
-            "yaml",
+            'bash',
+            'c',
+            'cpp',
+            'css',
+            'javascript',
+            'lua',
+            'python',
+            'rust',
+            'tsx',
+            'typescript',
+            'yaml',
           },
           highlight = { enable = true },
         }
-      end
+      end,
     },
 
 
@@ -35,10 +35,10 @@ return {
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
         require('crates').setup {
-          null_ls = {
-            enabled = true,
-            name = 'crates.nvim',
-          },
+          -- null_ls = {
+          --  enabled = true,
+          -- name = 'crates.nvim',
+          --},
           popup = { border = 'rounded' },
         }
       end,
@@ -62,10 +62,11 @@ return {
     },
     {
       'mattn/emmet-vim',
+      ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor' },
       -- optional settings:
       init = function()
-        vim.g.user_emmet_leader_key = '<C-Y>'
-        vim.g.user_emmet_mode = 'i'
+        vim.g.user_emmet_leader_key = ','
+        vim.g.user_emmet_mode = 'n'
       end,
     },
 
@@ -75,12 +76,25 @@ return {
       cmd = 'Copilot',
       event = 'InsertEnter',
       config = function()
-        require('copilot').setup {}
+        require('copilot').setup {
+          panel = { enabled = true },
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            keymap = {
+              accept = '<C-a>', -- Accept suggestion with Ctrl + L
+              next = '<C-f>', -- Navigate to next suggestion
+              prev = '<C-e>', -- Navigate to previous suggestion
+              accept_word = '<C-v>',
+            },
+          },
+        }
       end,
     },
     {
       'zbirenbaum/copilot-cmp',
-      dependencies = { 'copilot.lua' },
+      after = { 'copilot,lua' },
+      suggestion = { enabled = false },
       config = function()
         require('copilot_cmp').setup {
           suggestion = { enabled = true },
@@ -139,7 +153,7 @@ return {
           '--logLevel=Information',
           '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
           '--razorSourceGenerator='
-          .. vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'packages', 'roslyn', 'libexec', 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
+            .. vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'packages', 'roslyn', 'libexec', 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
           '--razorDesignTimePath=' .. vim.fs.joinpath(
             vim.fn.stdpath 'data' --[[@as string]],
             'mason',
@@ -185,5 +199,39 @@ return {
         },
       }
     end,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        direction = 'float', -- Floating terminal
+        float_opts = {
+          border = 'single', -- "single", "double", "shadow", "curved"
+          title_pos = 'center', -- Position title in center (Optional)
+        },
+        open_mapping = [[<Space>te]],
+        close_on_exit = true, -- Close the terminal when process exits
+        shade_terminals = false, -- Disable background shading
+      }
+    end,
+  },
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
+    opts = {
+      icon,
+      -- lazy.nvim  -- will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
 }
