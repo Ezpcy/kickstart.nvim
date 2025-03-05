@@ -23,7 +23,6 @@ return {
       end,
     },
 
-
     -- 2) Rust Tools & Crates
     {
       'simrat39/rust-tools.nvim',
@@ -82,10 +81,10 @@ return {
             enabled = true,
             auto_trigger = true,
             keymap = {
-              accept = '<C-a>', -- Accept suggestion with Ctrl + L
-              next = '<C-f>', -- Navigate to next suggestion
-              prev = '<C-e>', -- Navigate to previous suggestion
-              accept_word = '<C-v>',
+              accept = '<C-a>',
+              accept_word = '<S-Tab>',
+              next = '<C-g>',
+              prev = '<C-e>',
             },
           },
         }
@@ -171,7 +170,6 @@ return {
             ['csharp|inlay_hints'] = {
               csharp_enable_inlay_hints_for_implicit_object_creation = true,
               csharp_enable_inlay_hints_for_implicit_variable_types = true,
-
               csharp_enable_inlay_hints_for_lambda_parameter_types = true,
               csharp_enable_inlay_hints_for_types = true,
               dotnet_enable_inlay_hints_for_indexer_parameters = true,

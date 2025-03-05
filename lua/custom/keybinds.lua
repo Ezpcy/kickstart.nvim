@@ -2,6 +2,9 @@
 vim.keymap.set('n', '<C-Space>', '<cmd>ToggleTerm direction=horizontal<cr>', opts)
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
+-- Copilot
+vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Copilot toggle<CR>', { noremap = true, silent = false })
+
 -- barbar
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
