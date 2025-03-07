@@ -36,7 +36,7 @@ vim.schedule(function()
 end)
 
 -- Enable break indent
-vim.opt.breakindent = true
+-- vim.opt.breakindent = true
 
 -- Set tab size
 vim.opt.tabstop = 2 -- Number of spaces a tab counts for

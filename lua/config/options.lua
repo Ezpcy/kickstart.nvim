@@ -2,7 +2,7 @@
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
-vim.opt.spell = true
+-- vim.opt.spell = true
 vim.opt.spelllang = 'en,de'
 vim.opt.spellfile = '~/.config/nvim/spell/de.utf-8.add'
 -- Transparent
@@ -23,23 +23,19 @@ end
 
 vim.keymap.set('v', '<Leader>r', ':lua replace_whitespace_with_linebreak()<CR>')
 
-
 -- Enable spell checking for Markdown files
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
   callback = function()
     vim.opt_local.spell = true
-    vim.opt_local.spelllang = "en,de"
-    vim.opt_local.spellfile = "~/.config/lvim/spell/de.utf-8.add"
+    vim.opt_local.spelllang = 'en,de'
+    vim.opt_local.spellfile = '~/.config/lvim/spell/de.utf-8.add'
   end,
 })
 
-vim.colorscheme = "lackluster-hack"
+vim.colorscheme = 'lackluster-hack'
 vim.format_on_save = true
-vim.spellcheck = true
-vim.opt.relativenumber = true
-vim.transparent_window = true
-vim.cmd([[
+vim.cmd [[
   autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal linebreak
-]])
+]]
