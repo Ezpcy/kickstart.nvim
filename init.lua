@@ -1024,3 +1024,10 @@ require('mason').setup {
 
 require 'config.lsp'
 require 'custom.keybinds'
+
+-- Disable copilot at startup
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.cmd 'Copilot disable'
+  end,
+})

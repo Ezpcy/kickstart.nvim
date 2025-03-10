@@ -1,7 +1,5 @@
 -- Some user options
-vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.relativenumber = true
 -- vim.opt.spell = true
 vim.opt.spelllang = 'en,de'
 vim.opt.spellfile = '~/.config/nvim/spell/de.utf-8.add'
@@ -11,10 +9,6 @@ vim.g.transparent_window = true
 -- You can also set up an autocmd for that
 
 -- Keymaps
-vim.keymap.set('n', 'gt', '<cmd>BufferLineCycleNext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'gT', '<cmd>BufferLineCyclePrev<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-w>', '<cmd>BufferKill<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-t>', '<cmd>Copilot toggle<CR>', { noremap = true, silent = false })
 
 -- Example function that replaces whitespace with linebreak
 function _G.replace_whitespace_with_linebreak()
