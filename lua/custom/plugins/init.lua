@@ -1,26 +1,43 @@
 return {
   {
+    -- {
+    --   'nvim-treesitter/nvim-treesitter',
+    --   build = ':TSUpdate', -- updates parsers automatically
+    --   config = function()
+    --     require('nvim-treesitter.configs').setup {
+    --       ensure_installed = {
+    --         'bash',
+    --         'c',
+    --         'cpp',
+    --         'css',
+    --         'javascript',
+    --         'lua',
+    --         'python',
+    --         'rust',
+    --         'tsx',
+    --         'typescript',
+    --         'yaml',
+    --       },
+    --       highlight = { enable = true, additional_vim_regex_highlighting = false },
+    --       indent = { enable = true },
+    --     }
+    --   end,
+    -- },
     {
-      'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate', -- updates parsers automatically
+      'SmiteshP/nvim-navic',
+      dependencies = 'neovim/nvim-lspconfig',
       config = function()
-        require('nvim-treesitter.configs').setup {
-          ensure_installed = {
-            'bash',
-            'c',
-            'cpp',
-            'css',
-            'javascript',
-            'lua',
-            'python',
-            'rust',
-            'tsx',
-            'typescript',
-            'yaml',
-          },
-          highlight = { enable = true, additional_vim_regex_highlighting = false },
-          indent = { enable = true },
+        require('nvim-navic').setup {
+          highlight = true,
+          separator = ' → ', -- Change separator if needed
+          depth_limit = 3, -- Limits how deep the hierarchy shows
         }
+      end,
+    },
+    {
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require('symbols-outline').setup()
       end,
     },
     {
@@ -29,12 +46,12 @@ return {
         require('treesitter-context').setup {
           enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
           multiwindow = false, -- Enable multiwindow support.
-          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+          max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
           min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
           line_numbers = true,
           multiline_threshold = 20, -- Maximum number of lines to show for a single context
           trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-          mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+          mode = 'topline', -- Line used to calculate context. Choices: 'cursor', 'topline'
           -- Separator between context and content. Should be a single character string, like '-'.
           -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
           separator = nil,
@@ -240,22 +257,22 @@ return {
       }
     end,
   },
-  {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    },
-    init = function()
-      vim.g.barbar_auto_setup = false
-    end,
-    opts = {
-      icon,
-      -- lazy.nvim  -- will automatically call setup for you. put your options here, anything missing will use the default:
-      -- animation = true,
-      -- insert_at_start = true,
-      -- …etc.
-    },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  },
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function()
+  --     vim.g.barbar_auto_setup = false
+  --   end,
+  --   opts = {
+  --     icon,
+  --     -- lazy.nvim  -- will automatically call setup for you. put your options here, anything missing will use the default:
+  --     -- animation = true,
+  --     -- insert_at_start = true,
+  --     -- …etc.
+  --   },
+  --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  -- },
 }

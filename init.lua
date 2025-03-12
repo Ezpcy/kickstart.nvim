@@ -19,7 +19,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -161,14 +161,10 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns',
   require 'kickstart.plugins.autopairs',
-  'romgrk/barbar.nvim',
   dependencies = {
     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
   },
-  init = function()
-    vim.g.barbar_auto_setup = false
-  end,
   opts = {
     -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
     -- animation = true,
