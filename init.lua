@@ -1027,3 +1027,14 @@ vim.api.nvim_create_autocmd('VimEnter', {
     vim.cmd 'Copilot disable'
   end,
 })
+
+-- Multi Line
+vim.api.nvim_del_keymap('n', '<C-N>')
+vim.api.nvim_del_keymap('x', '<C-N>')
+vim.api.nvim_set_keymap('n', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
+
+vim.g.VM_maps = {
+  ['Find Next'] = '<C-]>', -- Move to next cursor using Ctrl-]
+  ['Find Prev'] = '<C-[>', -- Move to previous cursor using Ctrl-[
+}
