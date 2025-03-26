@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.colorscheme = 'lackluster-hack'
-vim.format_on_save = true
+vim.format_on_save = false
 vim.cmd [[
   autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal linebreak
