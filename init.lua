@@ -1037,4 +1037,5 @@ vim.api.nvim_set_keymap('x', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true,
 vim.g.VM_maps = {
   ['Find Next'] = '<C-]>', -- Move to next cursor using Ctrl-]
   ['Find Prev'] = '<C-[>', -- Move to previous cursor using Ctrl-[
+  ['Mouse Cursor'] = '<C-r-RightMouse>',
 }

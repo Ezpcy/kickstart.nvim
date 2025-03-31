@@ -73,18 +73,47 @@ vim.g.markdown_fenced_languages = {
   'jsx',
   'cpp',
   'go',
+  'java',
 }
 
-require('lspconfig').denols.setup {}
-
-local nvim_lsp = require 'lspconfig'
-nvim_lsp.denols.setup {
+local lspconfig = require 'lspconfig'
+lspconfig.denols.setup {
   on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+  root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
 }
 
-nvim_lsp.ts_ls.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern 'package.json',
+  root_dir = lspconfig.util.root_pattern 'package.json',
   single_file_support = false,
 }
+
+lspconfig.denols.setup {}
+
+lspconfig.jdtls.setup {
+  cmd = { 'jdtls' },
+  root_dir = vim.fn.getcwd(),
+  init_options = {
+    workspace = vim.fn.getcwd(),
+  },
+  settings = {
+    java = {
+      project = {
+        referencedLibraries = {
+          '/usr/share/java/tomcat10/*',
+        },
+      },
+    },
+  },
+}
+
+lspconfig.html.setup {
+  filetypes = { 'html', 'jsp' },
+}
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.jsp',
+  callback = function()
+    vim.bo.filetype = 'jsp'
+  end,
+})
