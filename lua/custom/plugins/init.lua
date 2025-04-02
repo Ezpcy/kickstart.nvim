@@ -1,28 +1,28 @@
 return {
   {
-    -- {
-    --   'nvim-treesitter/nvim-treesitter',
-    --   build = ':TSUpdate', -- updates parsers automatically
-    --   config = function()
-    --     require('nvim-treesitter.configs').setup {
-    --       ensure_installed = {
-    --         'bash',
-    --         'c',
-    --         'cpp',
-    --         'css',
-    --         'javascript',
-    --         'lua',
-    --         'python',
-    --         'rust',
-    --         'tsx',
-    --         'typescript',
-    --         'yaml',
-    --       },
-    --       highlight = { enable = true, additional_vim_regex_highlighting = false },
-    --       indent = { enable = true },
-    --     }
-    --   end,
-    -- },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      build = ':TSUpdate', -- updates parsers automatically
+      config = function()
+        require('nvim-treesitter.configs').setup {
+          ensure_installed = {
+            'bash',
+            'c',
+            'cpp',
+            'css',
+            'javascript',
+            'lua',
+            'python',
+            'rust',
+            'tsx',
+            'typescript',
+            'yaml',
+          },
+          highlight = { enable = true, additional_vim_regex_highlighting = false },
+          indent = { enable = true },
+        }
+      end,
+    },
     {
       'SmiteshP/nvim-navic',
       dependencies = 'neovim/nvim-lspconfig',
@@ -174,6 +174,7 @@ return {
       'mfussenegger/nvim-dap-python',
       dependencies = { 'nvim-dap' },
     },
+    { 'mfussenegger/nvim-jdtls', dependencies = { 'nvim-dap' } },
 
     'seblyng/roslyn.nvim',
     ft = { 'cs', 'razor' },
@@ -276,4 +277,5 @@ return {
   --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
   -- },
   { 'mg979/vim-visual-multi' },
+  'nvim-java/nvim-java',
 }
