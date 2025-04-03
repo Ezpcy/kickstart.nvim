@@ -17,6 +17,7 @@ return {
             'tsx',
             'typescript',
             'yaml',
+            'java',
           },
           highlight = { enable = true, additional_vim_regex_highlighting = false },
           indent = { enable = true },
@@ -174,8 +175,6 @@ return {
       'mfussenegger/nvim-dap-python',
       dependencies = { 'nvim-dap' },
     },
-    { 'mfussenegger/nvim-jdtls', dependencies = { 'nvim-dap' } },
-
     'seblyng/roslyn.nvim',
     ft = { 'cs', 'razor' },
     dependencies = {
@@ -278,4 +277,6 @@ return {
   -- },
   { 'mg979/vim-visual-multi' },
   'nvim-java/nvim-java',
+
+  --{ 'mfussenegger/nvim-jdtls', dependencies = { 'nvim-dap' } },
 }
