@@ -1,4 +1,3 @@
-require('java').setup()
 -- ================================================
 -- LSP SETTINGS
 -- ================================================
@@ -104,19 +103,34 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 -- Java
+require('java').setup {
+  root_markers = {
+    'settings.gradle',
+    'settings.gradle.kts',
+    'pom.xml',
+    'build.gradle',
+    'mvnw',
+    'gradlew',
+    'build.gradle',
+    'build.gradle.kts',
+    '.git',
+    'build.xml',
+    'src',
+  },
+
+  spring_boot_tools = {
+    enable = false,
+  },
+  jdk = {
+    auto_install = false,
+  },
+}
+
 lspconfig.jdtls.setup {
   settings = {
     java = {
-      configuration = {
-        runtimes = {
-          {
-            name = 'OpenJDK',
-            path = '/usr/bin/java',
-            default = true,
-          },
-        },
-      },
       project = {
+        sourcePaths = { 'src' },
         referencedLibraries = {
           '/usr/share/java/tomcat10/*',
         },
