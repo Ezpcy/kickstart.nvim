@@ -100,9 +100,17 @@ return {
     },
     {
       'mattn/emmet-vim',
-      ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor' },
+      ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor', 'jsp' },
       -- optional settings:
       init = function()
+        vim.cmd [[
+    autocmd FileType jsp EmmetInstall
+    autocmd FileType jsp let g:user_emmet_settings = {
+          \ 'jsp' : {
+          \     'extends' : 'html',
+          \ }
+          \ }
+    ]]
         vim.g.user_emmet_leader_key = ','
         vim.g.user_emmet_mode = 'n'
       end,
