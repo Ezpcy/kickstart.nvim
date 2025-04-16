@@ -103,9 +103,19 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   end,
 })
 
+-- Java
 lspconfig.jdtls.setup {
   settings = {
     java = {
+      configuration = {
+        runtimes = {
+          {
+            name = 'OpenJDK',
+            path = '/usr/bin/java',
+            default = true,
+          },
+        },
+      },
       project = {
         referencedLibraries = {
           '/usr/share/java/tomcat10/*',
