@@ -34,6 +34,14 @@ vim.opt.showmode = false
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
+--
+-- Format Rust files with rustfmt on save
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.rs',
+  callback = function()
+    vim.cmd 'silent! !rustfmt %'
+  end,
+})
 
 -- Enable break indent
 -- vim.opt.breakindent = true
