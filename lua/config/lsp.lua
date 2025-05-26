@@ -77,6 +77,7 @@ vim.g.markdown_fenced_languages = {
 }
 
 local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig.configs'
 
 lspconfig.denols.setup {
   on_attach = on_attach,
@@ -92,7 +93,7 @@ lspconfig.ts_ls.setup {
 lspconfig.denols.setup {}
 
 lspconfig.html.setup {
-  filetypes = { 'html', 'jsp' },
+  filetypes = { 'html' },
 }
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
@@ -138,3 +139,16 @@ lspconfig.jdtls.setup {
     },
   },
 }
+
+if not configs.jsp_lsp then
+  configs.jsp_lsp = {
+    default_config = {
+      cmd = { vim.fn.expand '~/Public/jsp-lsp' },
+      filetypes = { 'jsp' },
+      root_dir = lspconfig.util.root_pattern('.git', 'pom.xml'),
+      single_file_support = true,
+    },
+  }
+end
+
+lspconfig.jsp_lsp.setup {}
