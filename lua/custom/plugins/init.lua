@@ -284,7 +284,20 @@ return {
   --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
   -- },
   { 'mg979/vim-visual-multi' },
-  'nvim-java/nvim-java',
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+      'hrsh7th/cmp-buffer', -- Buffer source for nvim-cmp
+      'hrsh7th/cmp-path', -- Path completions
+      'hrsh7th/cmp-cmdline', -- Cmdline completions
+      -- any other sources you want
+    },
+    event = 'InsertEnter',
+    config = function()
+      require('cmp').setup {}
+    end,
+  },
 
-  --{ 'mfussenegger/nvim-jdtls', dependencies = { 'nvim-dap' } },
+  { 'mfussenegger/nvim-jdtls', ft = 'java', dependencies = { 'nvim-dap' } },
 }
