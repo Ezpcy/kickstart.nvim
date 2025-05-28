@@ -428,9 +428,14 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      -- Mason must be loaded before its dependents so we need to set it up here.
+      --  must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
+      { 'williamboman/mason.nvim', opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:crashdummyy/mason-registry',
+          },
+      } },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -1026,13 +1031,6 @@ lackluster.setup {
     telescope = 'default', -- telescope
     menu = 'default', -- nvim_cmp, wildmenu ... (bad idea to transparent)
     popup = 'default', -- lazy, mason, whichkey ... (bad idea to transparent)
-  },
-}
-
-require('mason').setup {
-  registries = {
-    'github:mason-org/mason-registry',
-    'github:crashdummyy/mason-registry',
   },
 }
 

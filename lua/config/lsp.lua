@@ -140,6 +140,7 @@ lspconfig.jdtls.setup {
   },
 }
 
+--[[
 if not configs.jsp_lsp then
   configs.jsp_lsp = {
     default_config = {
@@ -152,3 +153,4 @@ if not configs.jsp_lsp then
 end
 
 lspconfig.jsp_lsp.setup {}
+ ]]
