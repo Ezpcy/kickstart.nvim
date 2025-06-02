@@ -79,16 +79,17 @@ vim.g.markdown_fenced_languages = {
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 
-lspconfig.denols.setup {
+vim.lsp.config('denols', {
   on_attach = on_attach,
   root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
-}
+  single_file_support = false,
+})
 
--- lspconfig.ts_ls.setup {
+-- vim.lsp.config('ts_ls', {
 --   on_attach = on_attach,
 --   root_dir = lspconfig.util.root_pattern 'package.json',
 --   single_file_support = false,
--- }
+-- })
 
 -- lspconfig.html.setup {
 --   filetypes = { 'html' },
