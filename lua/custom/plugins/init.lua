@@ -111,7 +111,7 @@ return {
           \ }
           \ }
     ]]
-        vim.g.user_emmet_leader_key = ','
+        vim.g.user_emmet_leader_key = '<C-x>'
         vim.g.user_emmet_mode = 'n'
       end,
     },

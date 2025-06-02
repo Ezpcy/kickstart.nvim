@@ -90,9 +90,9 @@ lspconfig.denols.setup {
 --   single_file_support = false,
 -- }
 
-lspconfig.html.setup {
-  filetypes = { 'html' },
-}
+-- lspconfig.html.setup {
+--   filetypes = { 'html' },
+-- }
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.jsp',
