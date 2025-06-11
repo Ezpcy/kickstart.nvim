@@ -36,12 +36,14 @@ vim.schedule(function()
 end)
 --
 -- Format Rust files with rustfmt on save
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.rs',
-  callback = function()
-    vim.cmd 'silent! !rustfmt %'
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.rs',
+--   callback = function()
+--     vim.cmd 'write' -- save buffer to disk so rustfmt reads latest content
+--     vim.fn.system { 'rustfmt', vim.fn.expand '%' }
+--     vim.cmd 'edit' -- reload file if rustfmt changed it
+--   end,
+-- })
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -728,6 +730,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         sql = { 'sqlfmt' },
+        rust = { 'rustfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
