@@ -15,6 +15,7 @@ return {
   },
   opts = {
     filesystem = {
+      use_libuv_file_watcher = true,
       filtered_items = {
         visible = false, -- hide filtered items on open
         hide_gitignored = false,
