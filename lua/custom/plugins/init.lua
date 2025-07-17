@@ -100,7 +100,7 @@ return {
     },
     {
       'mattn/emmet-vim',
-      ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor', 'jsp' },
+      ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor', 'jsp', 'xml' },
       -- optional settings:
       init = function()
         vim.cmd [[
