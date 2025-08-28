@@ -312,4 +312,6 @@ return {
       -- log_level = 'debug',
     },
   },
+  { 'tpope/vim-fugitive' },
+  { 'sindrets/diffview.nvim' },
 }

@@ -74,3 +74,6 @@ vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', { noremap = true, sil
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Up>', ':resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { noremap = true, silent = true })
+
+-- Git
+vim.keymap.set('n', '<Space>hh', ':0Gclog', opts)
