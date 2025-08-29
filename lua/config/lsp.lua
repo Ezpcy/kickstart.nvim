@@ -85,6 +85,13 @@ vim.lsp.config('denols', {
   single_file_support = false,
 })
 
+vim.lsp.config('htmx', {
+  cmd = { 'htmx-lsp' }, -- from Mason or PATH
+  filetypes = { 'html', 'htmldjango', 'templ', 'php', 'blade', 'twig', 'eex', 'heex', 'vue', 'svelte', 'astro', 'mdx' },
+  single_file_support = true,
+  root_dir = lspconfig.util.root_pattern('.git', 'index.html'),
+})
+
 -- vim.lsp.config('ts_ls', {
 --   on_attach = on_attach,
 --   root_dir = lspconfig.util.root_pattern 'package.json',
