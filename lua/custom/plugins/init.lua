@@ -337,41 +337,41 @@ return {
       -- See Configuration section for options
     },
   },
-  {
-    'echasnovski/mini.files',
-    version = '*',
-    dependencies = {
-      'echasnovski/mini.icons',
-      'lewis6991/gitsigns.nvim',
-    },
-    config = function()
-      require('gitsigns').setup()
-      require('mini.icons').setup {
-        style = 'glyph',
-      }
-
-      require('mini.files').setup {
-        options = {
-          permanent_delete = false,
-          use_as_default_explorer = true,
-        },
-        windows = {
-          preview = true, -- shows file preview
-          width_preview = 65,
-        },
-      }
-
-      -- open mini.files at current file
-      vim.keymap.set('n', '<leader>e', function()
-        require('mini.files').open(vim.api.nvim_buf_get_name(0))
-      end, { desc = 'Open mini.files at current file' })
-
-      -- open mini.files at cwd
-      vim.keymap.set('n', '<leader>E', function()
-        require('mini.files').open(vim.loop.cwd())
-      end, { desc = 'Open mini.files at cwd' })
-    end,
-  },
+  -- {
+  --   'echasnovski/mini.files',
+  --   version = '*',
+  --   dependencies = {
+  --     'echasnovski/mini.icons',
+  --     'lewis6991/gitsigns.nvim',
+  --   },
+  --   config = function()
+  --     require('gitsigns').setup()
+  --     require('mini.icons').setup {
+  --       style = 'glyph',
+  --     }
+  --
+  --     require('mini.files').setup {
+  --       options = {
+  --         permanent_delete = false,
+  --         use_as_default_explorer = true,
+  --       },
+  --       windows = {
+  --         preview = true, -- shows file preview
+  --         width_preview = 65,
+  --       },
+  --     }
+  --
+  --     -- open mini.files at current file
+  --     vim.keymap.set('n', '<leader>e', function()
+  --       require('mini.files').open(vim.api.nvim_buf_get_name(0))
+  --     end, { desc = 'Open mini.files at current file' })
+  --
+  --     -- open mini.files at cwd
+  --     vim.keymap.set('n', '<leader>E', function()
+  --       require('mini.files').open(vim.loop.cwd())
+  --     end, { desc = 'Open mini.files at cwd' })
+  --   end,
+  -- },
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
@@ -379,11 +379,11 @@ return {
     opts = {},
   -- stylua: ignore
   keys = {
-    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    { "ä", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "è", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "ü", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    { "è", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-ä>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
   },
 }

@@ -76,12 +76,11 @@ vim.g.markdown_fenced_languages = {
   'java',
 }
 
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig.configs'
+-- Using vim.lsp.config instead of deprecated lspconfig
 
 vim.lsp.config('denols', {
   on_attach = on_attach,
-  root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
+  root_dir = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }),
   single_file_support = false,
 })
 
@@ -89,18 +88,18 @@ vim.lsp.config('htmx', {
   cmd = { 'htmx-lsp' }, -- from Mason or PATH
   filetypes = { 'html', 'htmldjango', 'templ', 'php', 'blade', 'twig', 'eex', 'heex', 'vue', 'svelte', 'astro', 'mdx' },
   single_file_support = true,
-  root_dir = lspconfig.util.root_pattern('.git', 'index.html'),
+  root_dir = vim.fs.root(0, { '.git', 'index.html' }),
 })
 
 -- vim.lsp.config('ts_ls', {
 --   on_attach = on_attach,
---   root_dir = lspconfig.util.root_pattern 'package.json',
+--   root_dir = vim.fs.root(0, { 'package.json' }),
 --   single_file_support = false,
 -- })
 
--- lspconfig.html.setup {
+-- vim.lsp.config('html', {
 --   filetypes = { 'html' },
--- }
+-- })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.jsp',
@@ -115,11 +114,11 @@ if not configs.jsp_lsp then
     default_config = {
       cmd = { vim.fn.expand '~/Public/jsp-lsp' },
       filetypes = { 'jsp' },
-      root_dir = lspconfig.util.root_pattern('.git', 'pom.xml'),
+      root_dir = vim.fs.root(0, { '.git', 'pom.xml' }),
       single_file_support = true,
     },
   }
 end
 
-lspconfig.jsp_lsp.setup {}
+vim.lsp.config('jsp_lsp', {})
  ]]
