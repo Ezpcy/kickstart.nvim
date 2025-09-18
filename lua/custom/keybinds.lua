@@ -59,7 +59,7 @@ map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
 map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
-map('n', '<Space>e', '<Cmd>Neotree toggle<CR>', opts)
+map('n', '<Space>e', '<Cmd>lua MiniFiles.open()<CR>', opts)
 
 -- Move line up and down with Alt+j and Alt+k in normal mode
 vim.api.nvim_set_keymap('n', '<M-j>', ':m .+1<CR>==', { noremap = true, silent = true })
@@ -77,3 +77,6 @@ vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { noremap = true, silent = tru
 
 -- Git
 vim.keymap.set('n', '<Space>hh', ':0Gclog', opts)
+vim.keymap.set('n', '<Space>hm', ':Gvdiffsplit!', opts)
+vim.keymap.set('n', '<Space>ms', ':diffget \\2', opts)
+vim.keymap.set('n', '<Space>mt', ':diffget \\2', opts)
