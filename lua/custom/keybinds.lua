@@ -18,7 +18,9 @@ map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
 
 -- Goto buffer in position...
 map('n', '<A-1>', '<Cmd>ToggleTerm direction=horizontal<CR>', opts)
+map('t', '<A-1>', '<Cmd>ToggleTerm direction=horizontal<CR>', opts)
 map('n', '<A-2>', '<Cmd>ToggleTerm direction=float<CR>', opts)
+map('t', '<A-2>', '<Cmd>ToggleTerm direction=float<CR>', opts)
 map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
 map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
 map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
