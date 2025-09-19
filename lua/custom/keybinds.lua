@@ -1,5 +1,5 @@
 -- Toggleterm
-vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<A-Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- Copilot
 vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Copilot toggle<CR>', { noremap = true, silent = false })
@@ -17,8 +17,8 @@ map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
 map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
 
 -- Goto buffer in position...
-map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+map('n', '<A-1>', '<Cmd>ToggleTerm direction=horizontal<CR>', opts)
+map('n', '<A-2>', '<Cmd>ToggleTerm direction=float<CR>', opts)
 map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
 map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
 map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)

@@ -197,7 +197,7 @@ return {
     version = '*',
     config = function()
       require('toggleterm').setup {
-        direction = 'horizontal', -- Floating terminal
+        direction = 'float', -- Floating terminal
         float_opts = {
           border = 'single', -- "single", "double", "shadow", "curved"
           title_pos = 'center', -- Position title in center (Optional)
