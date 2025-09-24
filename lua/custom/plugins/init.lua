@@ -63,13 +63,6 @@ return {
       }
     end,
   },
-
-  -- 2) Rust Tools & Crates
-  {
-    'simrat39/rust-tools.nvim',
-    -- This plugin is loaded by LSP config below, no direct config needed
-  },
-
   {
     'saecki/crates.nvim',
     version = 'v0.3.0',
