@@ -195,7 +195,7 @@ return {
           border = 'single', -- "single", "double", "shadow", "curved"
           title_pos = 'center', -- Position title in center (Optional)
         },
-        open_mapping = [[<Space>te]],
+        --open_mapping = [[<Space>te]],
         close_on_exit = true, -- Close the terminal when process exits
         shade_terminals = false, -- Disable background shading
       }
