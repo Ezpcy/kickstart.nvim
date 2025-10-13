@@ -327,6 +327,8 @@ return {
     },
     build = 'make tiktoken',
     opts = {
+      show_help = true,
+      model = 'claude-sonnet-4',
       -- See Configuration section for options
     },
   },
@@ -371,12 +373,21 @@ return {
     ---@type Flash.Config
     opts = {},
   -- stylua: ignore
-  keys = {
-    { "ä", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "è", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "ü", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "è", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-ä>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    keys = {
+      { "ä", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "è", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "ü", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "è", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-ä>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
+  {
+    's1n7ax/nvim-window-picker',
+    name = 'window-picker',
+    event = 'VeryLazy',
+    version = '2.*',
+    config = function()
+      require('window-picker').setup()
+    end,
   },
 }
