@@ -91,6 +91,34 @@ vim.lsp.config('htmx', {
   root_dir = vim.fs.root(0, { '.git', 'index.html' }),
 })
 
+-- -- For Rafisa
+-- vim.lsp.config('sonarlint_language_server', {
+--   -- Supported filetypes
+--   filetypes = {
+--     'javascript',
+--     'typescript',
+--     'python',
+--     'java',
+--     -- Add languages you need
+--   },
+--
+--   -- SonarQube connection (optional)
+--   settings = {
+--     sonarlint = {
+--       connectedMode = {
+--         -- Your internal SonarQube URL
+--         servers = {
+--           {
+--             serverId = 'my-sonarqube',
+--             serverUrl = 'https://sonarqube.yourcompany.com',
+--             token = 'your-token-here', -- Use environment variable in production
+--           },
+--         },
+--       },
+--     },
+--   },
+-- })
+
 -- vim.lsp.config('ts_ls', {
 --   on_attach = on_attach,
 --   root_dir = vim.fs.root(0, { 'package.json' }),
