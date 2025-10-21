@@ -119,7 +119,7 @@ vim.lsp.config('sonarlint', {
           {
             serverId = 'Rafisa',
             serverUrl = 'https://sonar.test.rafisa.org',
-            token = os.getenv 'RAFISA_SONAR_TOKEN',
+            token = vim.fn.getenv 'SONAR_RAFISA_TOKEN',
           },
         },
       },

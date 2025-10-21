@@ -1,6 +1,9 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Read .env file
+require('utils.env').load_env(vim.fn.expand '~/.config/nvim/.env')
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
