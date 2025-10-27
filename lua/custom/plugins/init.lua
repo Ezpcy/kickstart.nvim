@@ -328,7 +328,6 @@ return {
     build = 'make tiktoken',
     opts = {
       show_help = true,
-      model = 'claude-sonnet-4',
       -- See Configuration section for options
     },
   },
