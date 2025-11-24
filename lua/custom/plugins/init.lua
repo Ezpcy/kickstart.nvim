@@ -99,23 +99,43 @@ return {
 
   {
     'mattn/emmet-vim',
-    ft = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'vue', 'razor', 'jsp', 'xml' },
-    -- optional settings:
+    -- Add the React filetypes
+    ft = {
+      'html',
+      'css',
+      'javascript',
+      'javascriptreact', -- .jsx files
+      'typescript',
+      'typescriptreact', -- .tsx files
+      'vue',
+      'razor',
+      'jsp',
+      'xml',
+    },
     init = function()
-      vim.cmd [[
-    autocmd FileType jsp EmmetInstall
-    autocmd FileType jsp let g:user_emmet_settings = {
-          \ 'jsp' : {
-          \     'extends' : 'html',
-          \ }
-          \ }
-    ]]
+      -- Set leader key (Ctrl+x, then comma to expand)
       vim.g.user_emmet_leader_key = '<C-x>'
-      vim.g.user_emmet_mode = 'n'
-    end,
-  },
 
-  -- 4) Copilot
+      -- Enable in all modes ('a'), or use 'i' for insert mode only
+      vim.g.user_emmet_mode = 'a' -- Changed from 'n' to 'a'
+
+      -- Configure React support
+      vim.g.user_emmet_settings = {
+        javascript = {
+          extends = 'jsx',
+        },
+        javascriptreact = {
+          extends = 'jsx',
+        },
+        typescript = {
+          extends = 'tsx',
+        },
+        typescriptreact = {
+          extends = 'jsx', -- Use jsx syntax for .tsx files
+        },
+      }
+    end,
+  }, -- 4) Copilot
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
