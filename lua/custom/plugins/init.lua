@@ -439,7 +439,7 @@ return {
     },
     opts = {
       backend = 'openai',
-      open_ai_url = 'http://127.0.0.1:8080',
+      open_ai_url = 'http://127.0.0.1:5023',
       open_ai_token = 'mango',
       model = 'Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:Q4_K_M',
     },
