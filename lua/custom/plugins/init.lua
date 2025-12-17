@@ -416,8 +416,28 @@ return {
       { '<leader>om', mode = 'n', desc = 'Start Oatmeal session' },
     },
     opts = {
-      backend = 'ollama',
-      model = 'llama3.1:latest',
+      backend = 'openai',
+      open_ai_url = 'http://127.0.0.1:8080',
+      open_ai_token = 'mango',
+      model = 'Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:Q4_K_M',
+    },
+  },
+  {
+    '3rd/image.nvim',
+    build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+    opts = {
+      processor = 'magick_cli',
+    },
+    integrations = {
+      markdown = {
+        enabled = true,
+        clear_in_insert_mode = false,
+        download_remote_images = true,
+        only_render_image_at_cursor = false,
+        only_render_image_at_cursor_mode = 'popup', -- or "inline"
+        floating_windows = false, -- if true, images will be rendered in floating markdown windows
+        filetypes = { 'markdown', 'vimwiki' }, -- markdown extensions (ie. quarto) can go here
+      },
     },
   },
 }
