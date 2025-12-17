@@ -346,10 +346,32 @@ return {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
     },
     build = 'make tiktoken',
-    opts = {
-      show_help = true,
-      -- See Configuration section for options
-    },
+    opts = function()
+      local providers = require 'CopilotChat.config.providers'
+
+      return {
+        show_help = true,
+        providers = {
+          llama = vim.tbl_deep_extend('force', providers.copilot, {
+            get_url = function(_opts)
+              return 'http://127.0.0.1:5023/v1/chat/completions'
+            end,
+            get_headers = function()
+              return { ['Authorization'] = 'Bearer mango' }
+            end,
+            get_models = function()
+              return {
+                { id = 'unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_K_M', name = 'DeepSeek 8B' },
+                { id = 'Qwen/Qwen3-VL-8B-Instruct-GGUF:Q4_K_M', name = 'Qwen3 VL 8B' },
+                { id = 'mistralai/Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M', name = 'Ministral 3 8B' },
+                { id = 'Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:Q4_K_M', name = 'Qwen2.5 Coder 7B' },
+                { id = 'unsloth/gpt-oss-20b-GGUF:Q4_K_M', name = 'GPT OSS 20B' },
+              }
+            end,
+          }),
+        },
+      }
+    end,
   },
   -- {
   --   'echasnovski/mini.files',

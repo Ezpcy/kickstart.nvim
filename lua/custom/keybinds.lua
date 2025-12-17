@@ -83,3 +83,6 @@ vim.keymap.set('n', '<Space>hm', ':Gvdiffsplit!', opts)
 vim.keymap.set('n', '<Space>mb', ':diffget \\1', opts)
 vim.keymap.set('n', '<Space>ms', ':diffget \\2', opts)
 vim.keymap.set('n', '<Space>mt', ':diffget \\3', opts)
+
+-- CopilotChat
+map('n', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
