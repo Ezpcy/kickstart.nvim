@@ -79,10 +79,10 @@ vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { noremap = true, silent = tru
 
 -- Git
 vim.keymap.set('n', '<Space>hh', ':0Gclog', opts)
-vim.keymap.set('n', '<Space>hm', ':Gvdiffsplit!', opts)
 vim.keymap.set('n', '<Space>mb', ':diffget \\1', opts)
 vim.keymap.set('n', '<Space>ms', ':diffget \\2', opts)
 vim.keymap.set('n', '<Space>mt', ':diffget \\3', opts)
 
 -- CopilotChat
 map('n', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
+map('n', '<Space>hm', '<Cmd>DiffviewOpen<CR>', opts)
