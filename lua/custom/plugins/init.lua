@@ -262,7 +262,7 @@ return {
 
   {
     'rmagatti/auto-session',
-    lazy = false,
+    lazy = true,
 
     ---enables autocomplete for opts
     ---@module "auto-session"

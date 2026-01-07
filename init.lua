@@ -1,3 +1,12 @@
+-- Detect if on windows
+if vim.fn.has 'win32' == 1 then
+  vim.opt.shell = 'pwsh'
+  vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
+end
+
+-- Set <space> as the leader key
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
