@@ -3,7 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate', -- updates parsers automatically
     config = function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter').setup {
         ensure_installed = {
           'bash',
           'c',
@@ -262,7 +262,7 @@ return {
 
   {
     'rmagatti/auto-session',
-    lazy = false,
+    lazy = true,
 
     ---enables autocomplete for opts
     ---@module "auto-session"
