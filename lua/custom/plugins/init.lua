@@ -351,6 +351,7 @@ return {
 
       return {
         show_help = true,
+        model = 'claude-haiku-4.5',
         providers = {
           llama = vim.tbl_deep_extend('force', providers.copilot, {
             get_url = function(_opts)
