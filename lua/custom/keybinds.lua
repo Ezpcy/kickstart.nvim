@@ -2,7 +2,6 @@
 vim.api.nvim_set_keymap('t', '<A-Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- Copilot
-vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Copilot toggle<CR>', { noremap = true, silent = false })
 
 -- barbar
 local map = vim.api.nvim_set_keymap
@@ -84,5 +83,7 @@ vim.keymap.set('n', '<Space>ms', ':diffget \\2', opts)
 vim.keymap.set('n', '<Space>mt', ':diffget \\3', opts)
 
 -- CopilotChat
+map('n', '<C-t>', '<cmd>Copilot enable<CR>', { noremap = true, silent = false })
 map('n', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
+map('v', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
 map('n', '<Space>hm', '<Cmd>DiffviewOpen<CR>', opts)
