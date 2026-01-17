@@ -1,30 +1,5 @@
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate', -- updates parsers automatically
-    config = function()
-      require('nvim-treesitter').setup {
-        ensure_installed = {
-          'bash',
-          'c',
-          'cpp',
-          'css',
-          'javascript',
-          'lua',
-          'python',
-          'rust',
-          'tsx',
-          'typescript',
-          'yaml',
-          'java',
-        },
-        highlight = { enable = true, additional_vim_regex_highlighting = false },
-        indent = { enable = true },
-      }
-    end,
-  },
-
-  {
     'SmiteshP/nvim-navic',
     dependencies = 'neovim/nvim-lspconfig',
     config = function()
@@ -222,25 +197,6 @@ return {
     end,
   },
 
-  -- {
-  --   'romgrk/barbar.nvim',
-  --   dependencies = {
-  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-  --   },
-  --   init = function()
-  --     vim.g.barbar_auto_setup = false
-  --   end,
-  --   opts = {
-  --     icon,
-  --     -- lazy.nvim  -- will automatically call setup for you. put your options here, anything missing will use the default:
-  --     -- animation = true,
-  --     -- insert_at_start = true,
-  --     -- …etc.
-  --   },
-  --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  -- },
-
   { 'mg979/vim-visual-multi' },
 
   {
@@ -278,69 +234,6 @@ return {
   { 'sindrets/diffview.nvim' },
 
   {
-    'seblyng/roslyn.nvim',
-    ft = { 'cs', 'razor' },
-    dependencies = {
-      {
-        'tris203/rzls.nvim',
-        config = function()
-          require('rzls').setup {}
-        end,
-      },
-    },
-    config = function()
-      -- Mason custom registry that provides 'roslyn' and 'rzls'
-      require('mason').setup {
-        registries = {
-          'github:mason-org/mason-registry',
-          'github:Crashdummyy/mason-registry',
-        },
-      }
-
-      -- Compose Roslyn command with Razor integration (Mason paths)
-      local rzls_path = vim.fs.joinpath(vim.fn.stdpath 'data', 'mason', 'packages', 'rzls', 'libexec')
-      local cmd = {
-        'roslyn',
-        '--stdio',
-        '--logLevel=Information',
-        '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
-        '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
-        '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
-        '--extension',
-        vim.fs.joinpath(rzls_path, 'RazorExtension', 'Microsoft.VisualStudioCode.RazorExtension.dll'),
-      }
-
-      require('roslyn').setup {
-        cmd = cmd,
-        config = {
-          handlers = require 'rzls.roslyn_handlers',
-          settings = {
-            ['csharp|inlay_hints'] = {
-              csharp_enable_inlay_hints_for_implicit_object_creation = true,
-              csharp_enable_inlay_hints_for_implicit_variable_types = true,
-              csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-              csharp_enable_inlay_hints_for_types = true,
-              dotnet_enable_inlay_hints_for_indexer_parameters = true,
-              dotnet_enable_inlay_hints_for_literal_parameters = true,
-              dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-              dotnet_enable_inlay_hints_for_other_parameters = true,
-              dotnet_enable_inlay_hints_for_parameters = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-              dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-            },
-            ['csharp|code_lens'] = { dotnet_enable_references_code_lens = true },
-          },
-        },
-      }
-    end,
-    init = function()
-      vim.filetype.add {
-        extension = { razor = 'razor', cshtml = 'razor' },
-      }
-    end,
-  },
-  {
     'CopilotC-Nvim/CopilotChat.nvim',
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
@@ -373,41 +266,6 @@ return {
       }
     end,
   },
-  -- {
-  --   'echasnovski/mini.files',
-  --   version = '*',
-  --   dependencies = {
-  --     'echasnovski/mini.icons',
-  --     'lewis6991/gitsigns.nvim',
-  --   },
-  --   config = function()
-  --     require('gitsigns').setup()
-  --     require('mini.icons').setup {
-  --       style = 'glyph',
-  --     }
-  --
-  --     require('mini.files').setup {
-  --       options = {
-  --         permanent_delete = false,
-  --         use_as_default_explorer = true,
-  --       },
-  --       windows = {
-  --         preview = true, -- shows file preview
-  --         width_preview = 65,
-  --       },
-  --     }
-  --
-  --     -- open mini.files at current file
-  --     vim.keymap.set('n', '<leader>e', function()
-  --       require('mini.files').open(vim.api.nvim_buf_get_name(0))
-  --     end, { desc = 'Open mini.files at current file' })
-  --
-  --     -- open mini.files at cwd
-  --     vim.keymap.set('n', '<leader>E', function()
-  --       require('mini.files').open(vim.loop.cwd())
-  --     end, { desc = 'Open mini.files at cwd' })
-  --   end,
-  -- },
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
@@ -432,6 +290,7 @@ return {
     end,
   },
   {
+
     '3rd/image.nvim',
     build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
     opts = {
