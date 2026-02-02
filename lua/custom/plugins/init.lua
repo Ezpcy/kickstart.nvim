@@ -13,9 +13,7 @@ return {
 
   {
     'simrat39/symbols-outline.nvim',
-    config = function()
-      require('symbols-outline').setup()
-    end,
+    config = function() require('symbols-outline').setup() end,
   },
 
   {
@@ -56,9 +54,7 @@ return {
   -- 3) Additional UI / Utility
   {
     'j-hui/fidget.nvim',
-    config = function()
-      require('fidget').setup()
-    end,
+    config = function() require('fidget').setup() end,
   },
 
   { 'preservim/vim-markdown' },
@@ -209,25 +205,10 @@ return {
       -- any other sources you want
     },
     event = 'InsertEnter',
-    config = function()
-      require('cmp').setup {}
-    end,
+    config = function() require('cmp').setup {} end,
   },
 
   { 'mfussenegger/nvim-jdtls', ft = 'java', dependencies = { 'nvim-dap' } },
-
-  {
-    'rmagatti/auto-session',
-    lazy = true,
-
-    ---enables autocomplete for opts
-    ---@module "auto-session"
-    ---@type AutoSession.Config
-    opts = {
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      -- log_level = 'debug',
-    },
-  },
 
   { 'tpope/vim-fugitive' },
 
@@ -247,12 +228,8 @@ return {
         model = 'claude-haiku-4.5',
         providers = {
           llama = vim.tbl_deep_extend('force', providers.copilot, {
-            get_url = function(_opts)
-              return 'http://127.0.0.1:5023/v1/chat/completions'
-            end,
-            get_headers = function()
-              return { ['Authorization'] = 'Bearer mango' }
-            end,
+            get_url = function(_opts) return 'http://127.0.0.1:5023/v1/chat/completions' end,
+            get_headers = function() return { ['Authorization'] = 'Bearer mango' } end,
             get_models = function()
               return {
                 { id = 'unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_K_M', name = 'DeepSeek 8B' },
@@ -286,9 +263,7 @@ return {
     name = 'window-picker',
     event = 'VeryLazy',
     version = '2.*',
-    config = function()
-      require('window-picker').setup()
-    end,
+    config = function() require('window-picker').setup() end,
   },
   {
 
@@ -306,6 +281,44 @@ return {
         only_render_image_at_cursor_mode = 'popup', -- or "inline"
         floating_windows = false, -- if true, images will be rendered in floating markdown windows
         filetypes = { 'markdown', 'vimwiki' }, -- markdown extensions (ie. quarto) can go here
+      },
+    },
+  },
+  -- {
+  --   'folke/persistence.nvim',
+  --   event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+  --   opts = {
+  --     -- add any custom options here
+  --   },
+  -- },
+  {
+    'rmagatti/auto-session',
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    lazy = false,
+    keys = {
+      -- Will use Telescope if installed or a vim.ui.select picker otherwise
+      { '<leader>wr', '<cmd>AutoSession search<CR>', desc = 'Session search' },
+      { '<leader>ws', '<cmd>AutoSession save<CR>', desc = 'Save session' },
+      { '<leader>wa', '<cmd>AutoSession toggle<CR>', desc = 'Toggle autosave' },
+    },
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      -- The following are already the default values, no need to provide them if these are already the settings you want.
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      -- log_level = 'debug',
+      session_lens = {
+        picker = nil, -- "telescope"|"snacks"|"fzf"|"select"|nil Pickers are detected automatically but you can also manually choose one. Falls back to vim.ui.select
+        mappings = {
+          -- Mode can be a string or a table, e.g. {"i", "n"} for both insert and normal mode
+          delete_session = { 'i', '<C-d>' },
+          alternate_session = { 'i', '<C-s>' },
+          copy_session = { 'i', '<C-y>' },
+        },
       },
     },
   },

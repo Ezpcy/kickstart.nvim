@@ -41,9 +41,7 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 --
 -- Format Rust files with rustfmt on save
@@ -625,32 +623,20 @@ require('lazy').setup({
         vim.lsp.enable(name)
       end
 
-      -- Special Lua Config, as recommended by neovim help docs
-      vim.lsp.config('lua_ls', {
-        on_init = function(client)
-          if client.workspace_folders then
-            local path = client.workspace_folders[1].name
-            if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
-          end
-
-          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-            runtime = {
-              version = 'LuaJIT',
-              path = { 'lua/?.lua', 'lua/?/init.lua' },
-            },
-            workspace = {
-              checkThirdParty = false,
-              -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-              --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-              library = vim.api.nvim_get_runtime_file('', true),
-            },
-          })
-        end,
-        settings = {
-          Lua = {},
+      require('mason-lspconfig').setup {
+        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        automatic_installation = false,
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            -- This handles overriding only values explicitly passed
+            -- by the server configuration above. Useful when disabling
+            -- certain features of an LSP (for example, turning off formatting for ts_ls)
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            vim.lsp.config(server_name, server)
+          end,
         },
-      })
-      vim.lsp.enable 'lua_ls'
+      }
     end,
   },
 
@@ -795,6 +781,7 @@ require('lazy').setup({
       priority = 1000,
       config = function()
         local lackluster = require 'lackluster'
+
         lackluster.setup {
           tweak_color = {
             gray8 = '#7f7f7f',
@@ -903,59 +890,18 @@ require('lazy').setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- lackluster
-local lackluster = require 'lackluster'
-
-local color = lackluster.color -- blue, green, red, orange, black, lack, luster, gray1-9
-
--- !must called setup() before setting the colorscheme!
-lackluster.setup {
-  -- You can overwrite the following syntax colors by setting them to one of...
-  --   1) a hexcode like "#a1b2c3" for a custom color.
-  --   2) "default" or nil will just use whatever lackluster's default is.
-  tweak_color = {
-    gray8 = '#7f7f7f',
-    lack = '#2E3440',
-  },
-  tweak_syntax = {
-    string = '#CD9177',
-    -- string = "#a1b2c3", -- custom hexcode
-    -- string = color.green, -- lackluster color
-    string_escape = 'default',
-    comment = '#8f8f8f',
-    builtin = 'default', -- builtin modules and functions
-    type = 'default',
-    keyword = '#68A891',
-    keyword_return = 'default',
-    keyword_exception = 'default',
-  },
-  -- You can overwrite the following background colors by setting them to one of...
-  --   1) a hexcode like "#a1b2c3" for a custom color
-  --   2) "none" for transparency
-  --   3) "default" or nil will just use whatever lackluster's default is.
-  tweak_background = {
-    normal = 'default', -- main background
-    -- normal = 'none',    -- transparent
-    -- normal = '#a1b2c3',    -- hexcode
-    -- normal = color.green,    -- lackluster color
-    telescope = 'default', -- telescope
-    menu = 'default', -- nvim_cmp, wildmenu ... (bad idea to transparent)
-    popup = 'default', -- lazy, mason, whichkey ... (bad idea to transparent)
-  },
-}
 
 require 'config.lsp'
 require 'custom.keybinds'
 
 -- Disable copilot at startup
 vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    vim.cmd 'Copilot disable'
-  end,
+  callback = function() vim.cmd 'Copilot disable' end,
 })
 
 -- Multi Line
-vim.api.nvim_del_keymap('n', '<C-N>')
-vim.api.nvim_del_keymap('x', '<C-N>')
+pcall(vim.api.nvim_del_keymap, 'n', '<C-N>')
+pcall(vim.api.nvim_del_keymap, 'x', '<C-N>')
 vim.api.nvim_set_keymap('n', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
 
