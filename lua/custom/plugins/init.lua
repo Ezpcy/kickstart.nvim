@@ -12,10 +12,24 @@ return {
   },
 
   {
-    'simrat39/symbols-outline.nvim',
-    config = function() require('symbols-outline').setup() end,
+    'hedyhli/outline.nvim',
+    lazy = true,
+    cmd = { 'Outline', 'OutlineOpen' },
+    keys = { -- Example mapping to toggle outline
+      { '<leader>o', '<cmd>Outline<CR>', desc = 'Toggle outline' },
+    },
+    opts = {
+      -- Your setup opts here
+    },
   },
 
+  {
+    'nvim-java/nvim-java',
+    config = function()
+      require('java').setup()
+      vim.lsp.enable 'jdtls'
+    end,
+  },
   {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
@@ -208,7 +222,7 @@ return {
     config = function() require('cmp').setup {} end,
   },
 
-  { 'mfussenegger/nvim-jdtls', ft = 'java', dependencies = { 'nvim-dap' } },
+  -- { 'mfussenegger/nvim-jdtls', ft = 'java', dependencies = { 'nvim-dap' } },
 
   { 'tpope/vim-fugitive' },
 

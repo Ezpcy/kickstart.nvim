@@ -103,9 +103,20 @@ vim.lsp.config('htmx', {
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.jsp',
-  callback = function()
-    vim.bo.filetype = 'jsp'
-  end,
+  callback = function() vim.bo.filetype = 'jsp' end,
+})
+
+-- jdtls
+vim.lsp.config('jdtls', {
+  settings = {
+    java = {
+      project = {
+        referencedLibraries = {
+          '/usr/share/java/tomcat10/*',
+        },
+      },
+    },
+  },
 })
 
 --[[
