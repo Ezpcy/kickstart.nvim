@@ -87,3 +87,9 @@ map('n', '<C-t>', '<cmd>Copilot enable<CR>', { noremap = true, silent = false })
 map('n', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
 map('v', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
 map('n', '<Space>hm', '<Cmd>DiffviewOpen<CR>', opts)
+
+-- New tab
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'New tab' })
+
+-- Close tab
+vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Close tab' })
