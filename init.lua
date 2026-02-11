@@ -773,35 +773,6 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-
-  { -- You can easily change to a different colorscheme.
-    {
-      'slugbyte/lackluster.nvim',
-      lazy = false,
-      priority = 1000,
-      config = function()
-        local lackluster = require 'lackluster'
-
-        lackluster.setup {
-          tweak_color = {
-            gray8 = '#7f7f7f',
-            lack = '#2E3440',
-          },
-          tweak_syntax = {
-            string = '#CD9177',
-            comment = '#8f8f8f',
-            keyword = '#68A891',
-          },
-          tweak_background = {
-            normal = 'none',
-          },
-        }
-        -- Setting one of the lackluster variants
-        vim.cmd.colorscheme 'lackluster-hack'
-      end,
-    },
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -821,6 +792,9 @@ require('lazy').setup({
     opts = {
 
       ensure_installed = {
+        'latex',
+        'go',
+        'cs',
         'bash',
         'c',
         'cpp',

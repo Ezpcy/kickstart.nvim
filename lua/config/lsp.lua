@@ -58,23 +58,7 @@ if rt_status_ok then
   }
 end
 
--- Deno
-vim.g.markdown_fenced_languages = {
-  'typescript',
-  'typescriptreact',
-  'javascript',
-  'javascriptreact',
-  'css',
-  'html',
-  'json',
-  'bash',
-  'rust',
-  'tsx',
-  'jsx',
-  'cpp',
-  'go',
-  'java',
-}
+vim.g.markdown_fenced_languages = {}
 
 -- Using vim.lsp.config instead of deprecated lspconfig
 

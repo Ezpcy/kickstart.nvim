@@ -71,16 +71,7 @@ return {
     config = function() require('fidget').setup() end,
   },
 
-  { 'preservim/vim-markdown' },
-
-  {
-    'iamcco/markdown-preview.nvim',
-    -- build = 'cd app && npm install',
-    ft = { 'markdown' },
-    config = function()
-      -- auto-start or other config if desired
-    end,
-  },
+  require 'custom.plugins.markview',
 
   {
     'mattn/emmet-vim',
@@ -322,8 +313,9 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
+      auto_restore = false,
       -- The following are already the default values, no need to provide them if these are already the settings you want.
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/home/ezpz' },
       -- log_level = 'debug',
       session_lens = {
         picker = nil, -- "telescope"|"snacks"|"fzf"|"select"|nil Pickers are detected automatically but you can also manually choose one. Falls back to vim.ui.select
@@ -336,4 +328,6 @@ return {
       },
     },
   },
+
+  require 'custom.plugins.lackluster',
 }
