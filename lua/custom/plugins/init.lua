@@ -170,11 +170,6 @@ return {
     end,
   },
 
-  -- 6) DAP Support for codelldb or Python, etc.
-  {
-    'mfussenegger/nvim-dap', -- Typically included in many frameworks
-  },
-
   -- If you want the Python debug adapter:
   {
     'mfussenegger/nvim-dap-python',
@@ -330,11 +325,17 @@ return {
   },
   {
     'scalameta/nvim-metals',
-    ft = { 'scala', 'sbt' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+    },
+    ft = { 'scala', 'sbt', 'java' },
     opts = function()
       local metals_config = require('metals').bare_config()
+
       metals_config.on_attach = function(client, bufnr)
-        -- your on_attach function
+        -- Instructs Metals to register itself as the debug adapter
+        require('metals').setup_dap()
       end
 
       return metals_config
@@ -346,6 +347,15 @@ return {
         callback = function() require('metals').initialize_or_attach(metals_config) end,
         group = nvim_metals_group,
       })
+    end,
+  },
+  {
+    'lervag/vimtex',
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = 'zathura'
     end,
   },
 
