@@ -12,9 +12,14 @@ return {
         markdown = {
           -- 2. ADD THIS: Explicitly force the code block style to be readable
           code_blocks = {
+
             enable = true,
-            style = 'simple',
-            hl = 'MarkviewCode', -- We will define this below if it's still ugly
+            style = 'fenced', -- Options: "fenced", "simple"
+            hl = 'MarkviewCode', -- Highlight group for the block
+
+            -- Language tag settings
+            info_hl = 'MarkviewCodeInfo',
+            pad_amount = 3,
           },
           headings = presets.headings.slanted,
 
@@ -26,15 +31,6 @@ return {
           inlines = { enable = true, hl = 'MarkviewInlineCode' },
           blocks = { enable = true, hl = 'MarkviewCode' },
           -- ... rest of your latex config
-        },
-        code_blocks = {
-          enable = true,
-          style = 'fenced', -- Options: "fenced", "simple"
-          hl = 'MarkviewCode', -- Highlight group for the block
-
-          -- Language tag settings
-          info_hl = 'MarkviewCodeInfo',
-          pad_amount = 3,
         },
       }
 
