@@ -75,6 +75,9 @@ return {
 
   {
     'mattn/emmet-vim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', -- ensures treesitter loads first
+    },
     -- Add the React filetypes
     ft = {
       'html',

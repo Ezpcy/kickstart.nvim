@@ -790,8 +790,9 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate', -- updates parsers automatically
     opts = {
-
       ensure_installed = {
+        'html',
+        'css',
         'latex',
         'go',
         'cs',
