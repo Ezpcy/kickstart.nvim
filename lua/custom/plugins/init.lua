@@ -311,7 +311,7 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
-      auto_restore = false,
+      auto_restore = true,
       -- The following are already the default values, no need to provide them if these are already the settings you want.
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/home/ezpz' },
       -- log_level = 'debug',
