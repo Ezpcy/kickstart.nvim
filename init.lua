@@ -707,6 +707,7 @@ require('lazy').setup {
     event = 'VimEnter',
     version = '1.*',
     dependencies = {
+      'Kaiser-Yang/blink-cmp-avante',
       -- Snippet Engine
       {
         'L3MON4D3/LuaSnip',
@@ -776,7 +777,19 @@ require('lazy').setup {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets' },
+        default = { 'lsp', 'path', 'snippets', 'avante' },
+
+        per_filetype = {
+          ['AvanteInput'] = { 'avante' }, -- only avante, drops path/lsp/snippets
+        },
+
+        providers = {
+          avante = {
+            module = 'blink-cmp-avante',
+            name = 'Avante',
+            opts = {},
+          },
+        },
       },
 
       snippets = { preset = 'luasnip' },
@@ -822,7 +835,7 @@ require('lazy').setup {
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
       -- ensure basic parser are installed
-      local parsers = {      
+      local parsers = {
         'bash',
         'c',
         'cpp',
@@ -846,7 +859,8 @@ require('lazy').setup {
         'vim',
         'vimdoc',
         'yaml',
-        'scala',}
+        'scala',
+      }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer

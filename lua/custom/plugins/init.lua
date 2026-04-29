@@ -70,9 +70,6 @@ return {
     'j-hui/fidget.nvim',
     config = function() require('fidget').setup() end,
   },
-
-  require 'custom.plugins.markview',
-
   {
     'mattn/emmet-vim',
     dependencies = {
@@ -361,6 +358,15 @@ return {
       vim.g.vimtex_view_method = 'zathura'
     end,
   },
+  {
+    -- Make sure to set this up properly if you have lazy=true
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {
+      file_types = { 'markdown', 'Avante' },
+    },
+    ft = { 'markdown', 'Avante' },
+  },
 
   require 'custom.plugins.lackluster',
+  require 'custom.plugins.avant',
 }
