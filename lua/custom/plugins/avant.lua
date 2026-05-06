@@ -26,6 +26,7 @@ return {
         auth_method = 'oauth-personal',
       },
     },
+    mappings = {},
   },
   dependencies = {
     'nvim-lua/plenary.nvim',

@@ -77,13 +77,13 @@ vim.keymap.set('n', '<C-Up>', ':resize +2<CR>', { noremap = true, silent = true 
 vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { noremap = true, silent = true })
 
 -- Git
-vim.keymap.set('n', '<Space>hh', ':0Gclog', opts)
-vim.keymap.set('n', '<Space>mb', ':diffget \\1', opts)
-vim.keymap.set('n', '<Space>ms', ':diffget \\2', opts)
-vim.keymap.set('n', '<Space>mt', ':diffget \\3', opts)
+map('n', '<Space>hh', ':0Gclog<CR>', opts)
+map('n', '<Space>mb', ':diffget \\1<CR>', opts)
+map('n', '<Space>ms', ':diffget \\2<CR>', opts)
+map('n', '<Space>mt', ':diffget \\3<CR>', opts)
 
 -- CopilotChat
-map('n', '<C-t>', '<cmd>Copilot enable<CR>', { noremap = true, silent = false })
+map('n', '<C-t>', '<cmd>Copilot enable<CR>', opts)
 map('n', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
 map('v', '<Space>cc', '<Cmd>CopilotChatToggle<CR>', opts)
 map('n', '<Space>hm', '<Cmd>DiffviewOpen<CR>', opts)
