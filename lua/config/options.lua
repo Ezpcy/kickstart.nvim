@@ -11,9 +11,7 @@ vim.g.transparent_window = true
 -- Keymaps
 
 -- Example function that replaces whitespace with linebreak
-function _G.replace_whitespace_with_linebreak()
-  vim.cmd [['<,'>s/\s\+/\r/g]]
-end
+function _G.replace_whitespace_with_linebreak() vim.cmd [['<,'>s/\s\+/\r/g]] end
 
 vim.keymap.set('v', '<Leader>r', ':lua replace_whitespace_with_linebreak()<CR>')
 
@@ -27,7 +25,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.colorscheme = 'lackluster-hack'
 vim.format_on_save = false
 vim.cmd [[
   autocmd FileType markdown setlocal wrap

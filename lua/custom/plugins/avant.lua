@@ -12,7 +12,13 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = 'avante.md',
     -- for example
+    auto_suggestions_provider = 'copilot', -- copilot for inline suggestions
     provider = 'gemini-cli',
+    providers = {
+      copilot = {
+        model = 'claude-haiku-4.5',
+      },
+    },
     acp_providers = {
       ['gemini-cli'] = {
         command = 'gemini',
@@ -25,6 +31,17 @@ return {
         },
         auth_method = 'oauth-personal',
       },
+      ['claude-code'] = {
+        command = 'claude-code-acp',
+        args = {},
+        env = {
+          NODE_NO_WARNINGS = '1',
+          ANTHROPIC_API_KEY = os.getenv 'ANTHROPIC_API_KEY',
+        },
+      },
+    },
+    input = {
+      provider = 'dressing',
     },
     mappings = {},
   },
