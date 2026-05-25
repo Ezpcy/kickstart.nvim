@@ -13,7 +13,7 @@ return {
     instructions_file = 'avante.md',
     -- for example
     auto_suggestions_provider = 'copilot', -- copilot for inline suggestions
-    provider = 'gemini-cli',
+    provider = 'opencode',
     providers = {
       copilot = {
         model = 'claude-haiku-4.5',
@@ -30,6 +30,15 @@ return {
           GEMINI_DEFAULT_AUTH_TYPE = 'oauth-personal',
         },
         auth_method = 'oauth-personal',
+      },
+      ['opencode'] = {
+        command = 'opencode',
+        args = { 'acp' },
+        model = 'google/antigravity-claude-sonnet-4-6',
+        env = {
+          NODE_NO_WARNINGS = '1',
+          HOME = os.getenv 'HOME',
+        },
       },
       ['claude-code'] = {
         command = 'claude-code-acp',
