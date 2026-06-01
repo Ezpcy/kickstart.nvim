@@ -13,7 +13,7 @@ return {
     instructions_file = 'avante.md',
     -- for example
     auto_suggestions_provider = 'copilot', -- copilot for inline suggestions
-    provider = 'opencode',
+    provider = 'claude-code',
     providers = {
       copilot = {
         model = 'claude-haiku-4.5',
@@ -34,14 +34,14 @@ return {
       ['opencode'] = {
         command = 'opencode',
         args = { 'acp' },
-        model = 'google/antigravity-claude-sonnet-4-6',
+        model = 'antigravity-claude-sonnet-4-6',
         env = {
           NODE_NO_WARNINGS = '1',
           HOME = os.getenv 'HOME',
         },
       },
       ['claude-code'] = {
-        command = 'claude-code-acp',
+        command = 'claude-agent-acp',
         args = {},
         env = {
           NODE_NO_WARNINGS = '1',
