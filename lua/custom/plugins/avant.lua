@@ -20,17 +20,6 @@ return {
       },
     },
     acp_providers = {
-      ['gemini-cli'] = {
-        command = 'gemini',
-        args = { '--experimental-acp' },
-        env = {
-          NODE_NO_WARNINGS = '1',
-          HOME = os.getenv 'HOME',
-          GEMINI_API_KEY = os.getenv 'GEMINI_API_KEY',
-          GEMINI_DEFAULT_AUTH_TYPE = 'oauth-personal',
-        },
-        auth_method = 'oauth-personal',
-      },
       ['opencode'] = {
         command = 'opencode',
         args = { 'acp' },
@@ -51,6 +40,9 @@ return {
     },
     input = {
       provider = 'dressing',
+    },
+    selection = {
+      hint_display = 'none',
     },
     mappings = {},
   },
