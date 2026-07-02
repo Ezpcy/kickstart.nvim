@@ -13,17 +13,15 @@ return {
     instructions_file = 'avante.md',
     -- for example
     auto_suggestions_provider = 'copilot', -- copilot for inline suggestions
-    provider = 'claude-code',
+    provider = 'opencode',
     providers = {
       copilot = {
-        model = 'claude-haiku-4.5',
       },
     },
     acp_providers = {
       ['opencode'] = {
         command = 'opencode',
         args = { 'acp' },
-        model = 'antigravity-claude-sonnet-4-6',
         env = {
           NODE_NO_WARNINGS = '1',
           HOME = os.getenv 'HOME',
@@ -43,6 +41,10 @@ return {
     },
     selection = {
       hint_display = 'none',
+    },
+    web_search_engine = {
+      provider = "searxng"
+
     },
     mappings = {},
   },
