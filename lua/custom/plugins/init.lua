@@ -367,6 +367,7 @@ return {
     ft = { 'markdown', 'Avante' },
   },
 
+  require 'custom.plugins.television',
   require 'custom.plugins.lackluster',
   require 'custom.plugins.avant',
 }

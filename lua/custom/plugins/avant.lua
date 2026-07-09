@@ -13,7 +13,7 @@ return {
     instructions_file = 'avante.md',
     -- for example
     auto_suggestions_provider = 'copilot', -- copilot for inline suggestions
-    provider = 'opencode',
+    provider = 'claude-code',
     providers = {
       copilot = {
       },

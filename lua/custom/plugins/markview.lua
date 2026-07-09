@@ -5,7 +5,7 @@ return {
     lazy = false,
     config = function()
       local presets = require 'markview.presets'
-      vim.g.markview_dark_bg = '#1a1a1a'
+      vim.g.markview_dark_bg = '#2c2c2c'
 
       require('markview').setup {
         -- Your existing configuration...

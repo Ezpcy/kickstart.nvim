@@ -8,8 +8,8 @@ return {
 
       lackluster.setup {
         tweak_color = {
-          gray8 = '#7f7f7f',
           -- lack = '#2c2c2c',
+          gray8 = '#b3b3b3',
         },
         tweak_syntax = {
           string = '#CD9177',
@@ -18,6 +18,9 @@ return {
         },
         tweak_background = {
           normal = 'none',
+          telescope = '#080808',
+          menu = '#080808',
+          popup = '#080808',
         },
       }
       -- Setting one of the lackluster variants
