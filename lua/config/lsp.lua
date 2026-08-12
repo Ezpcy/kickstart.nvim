@@ -103,17 +103,6 @@ vim.lsp.config('jdtls', {
   },
 })
 
---[[
-if not configs.jsp_lsp then
-  configs.jsp_lsp = {
-    default_config = {
-      cmd = { vim.fn.expand '~/Public/jsp-lsp' },
-      filetypes = { 'jsp' },
-      root_dir = vim.fs.root(0, { '.git', 'pom.xml' }),
-      single_file_support = true,
-    },
-  }
-end
-
-vim.lsp.config('jsp_lsp', {})
- ]]
+vim.lsp.config('tinymist', {
+  root_dir = vim.fs.root(0, { 'main.typ', '.git' })
+})
