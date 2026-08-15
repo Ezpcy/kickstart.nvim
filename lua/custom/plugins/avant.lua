@@ -12,15 +12,15 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = 'avante.md',
     -- for example
-    auto_suggestions_provider = 'opencode-go',
-    provider = 'opencode',
+    -- auto_suggestions_provider = 'opencode-go',
+    provider = 'claude-code',
     providers = {
       copilot = {
       },
       ['opencode-go'] = {
         __inherited_from = 'openai',
         endpoint = 'https://opencode.ai/zen/go/v1',
-        api_key_name = "OPENCODE_GO_API_KEY"
+        api_key_name = "OPENCODE_GO_API_KEY",
       },
     },
     acp_providers = {
@@ -33,12 +33,14 @@ return {
         },
       },
       ['claude-code'] = {
-        command = 'claude-agent-acp',
-        args = {},
-        env = {
-          NODE_NO_WARNINGS = '1',
-          ANTHROPIC_API_KEY = os.getenv 'ANTHROPIC_API_KEY',
-        },
+    ["claude-code"] = {
+      command = "npx",
+      args = { "@agentclientprotocol/claude-agent-acp" },
+      env = {
+        NODE_NO_WARNINGS = "1",
+        ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+      },
+    },
       },
     },
     input = {
@@ -46,9 +48,6 @@ return {
     },
     selection = {
       hint_display = 'none',
-    },
-    web_search_engine = {
-      provider = "searxng"
     },
     mappings = {},
   },
