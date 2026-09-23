@@ -9,6 +9,7 @@ return {
       lackluster.setup {
         tweak_color = {
           -- lack = '#2c2c2c',
+          gray8 = '#daeae2',
         },
         tweak_syntax = {
           string = '#CD9177',
