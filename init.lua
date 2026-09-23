@@ -42,7 +42,20 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+vim.schedule(function()
+  -- Over SSH there is no display server, so copy through the terminal with OSC 52
+  if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+    local osc52 = require 'vim.ui.clipboard.osc52'
+    -- Many terminals block OSC 52 reads, so paste from Neovim's own register instead
+    local function paste() return { vim.fn.split(vim.fn.getreg '', '\n'), vim.fn.getregtype '' } end
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = { ['+'] = osc52.copy '+', ['*'] = osc52.copy '*' },
+      paste = { ['+'] = paste, ['*'] = paste },
+    }
+  end
+  vim.o.clipboard = 'unnamedplus'
+end)
 
 --
 -- Format Rust files with rustfmt on save
