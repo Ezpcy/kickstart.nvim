@@ -23,8 +23,9 @@ return {
           popup = '#080808',
         },
       }
-      -- Setting one of the lackluster variants
-      vim.cmd.colorscheme 'lackluster-hack'
+      -- main-theme (colors/main-theme.lua) matches the desktop; lackluster stays
+      -- installed: switch back with vim.cmd.colorscheme 'lackluster-hack'
+      vim.cmd.colorscheme 'main-theme'
     end,
   },
 }
