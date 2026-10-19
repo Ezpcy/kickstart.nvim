@@ -10,18 +10,17 @@ return {
   opts = {
     -- add any opts here
     -- this file can contain specific instructions for your project
-    instructions_file = 'avante.md',
+    instructions_file = 'CLAUDE.md',
     -- for example
-    -- auto_suggestions_provider = 'opencode-go',
+    -- auto_suggestions_provider = 'local',
     provider = 'claude-code',
     providers = {
-      copilot = {
-      },
-      ['opencode-go'] = {
-        __inherited_from = 'openai',
-        endpoint = 'https://opencode.ai/zen/go/v1',
-        api_key_name = "OPENCODE_GO_API_KEY",
-      },
+      copilot = {},
+      -- ['local'] = {
+      --   __inherited_from = 'openai',
+      --   endpoint = 'http://127.0.0.1:5023/v1',
+      --   api_key_name = 'mango',
+      -- },
     },
     acp_providers = {
       ['opencode'] = {
@@ -33,14 +32,14 @@ return {
         },
       },
       ['claude-code'] = {
-    ["claude-code"] = {
-      command = "npx",
-      args = { "@agentclientprotocol/claude-agent-acp" },
-      env = {
-        NODE_NO_WARNINGS = "1",
-        ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
-      },
-    },
+        ['claude-code'] = {
+          command = 'npx',
+          args = { '@agentclientprotocol/claude-agent-acp' },
+          env = {
+            NODE_NO_WARNINGS = '1',
+            ANTHROPIC_API_KEY = os.getenv 'ANTHROPIC_API_KEY',
+          },
+        },
       },
     },
     input = {
@@ -54,12 +53,13 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
+    { 'ColinKennedy/mega.cmdparse', dependencies = { 'ColinKennedy/mega.logging' } },
     --- The below dependencies are optional,
     'nvim-mini/mini.pick', -- for file_selector provider mini.pick
     'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
     'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
     'ibhagwan/fzf-lua', -- for file_selector provider fzf
-    'stevearc/dressing.nvim', -- for input provider dressing
+    'folke/snacks.nvim', -- for input provider snacks
     'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
     'zbirenbaum/copilot.lua', -- for providers='copilot'
     {
@@ -78,6 +78,14 @@ return {
           use_absolute_path = true,
         },
       },
+    },
+    {
+      -- Make sure to set this up properly if you have lazy=true
+      'MeanderingProgrammer/render-markdown.nvim',
+      opts = {
+        file_types = { 'markdown', 'Avante' },
+      },
+      ft = { 'markdown', 'Avante' },
     },
   },
 }
