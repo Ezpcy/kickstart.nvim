@@ -215,36 +215,6 @@ return {
   { 'sindrets/diffview.nvim' },
 
   {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
-    },
-    build = 'make tiktoken',
-    opts = function()
-      local providers = require 'CopilotChat.config.providers'
-
-      return {
-        show_help = true,
-        model = 'claude-haiku-4.5',
-        providers = {
-          llama = vim.tbl_deep_extend('force', providers.copilot, {
-            get_url = function(_opts) return 'http://127.0.0.1:5023/v1/chat/completions' end,
-            get_headers = function() return { ['Authorization'] = 'Bearer mango' } end,
-            get_models = function()
-              return {
-                { id = 'unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_K_M', name = 'DeepSeek 8B' },
-                { id = 'Qwen/Qwen3-VL-8B-Instruct-GGUF:Q4_K_M', name = 'Qwen3 VL 8B' },
-                { id = 'mistralai/Ministral-3-8B-Instruct-2512-GGUF:Q4_K_M', name = 'Ministral 3 8B' },
-                { id = 'Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:Q4_K_M', name = 'Qwen2.5 Coder 7B' },
-                { id = 'unsloth/gpt-oss-20b-GGUF:Q4_K_M', name = 'GPT OSS 20B' },
-              }
-            end,
-          }),
-        },
-      }
-    end,
-  },
-  {
     'folke/flash.nvim',
     event = 'VeryLazy',
     ---@type Flash.Config
@@ -371,7 +341,7 @@ return {
 
       -- Recommended/example keymaps
       vim.keymap.set({ 'n', 'x' }, '<C-a>', function() require('opencode').ask '@this: ' end, { desc = 'Ask OpenCode…' })
-      vim.keymap.set({ 'n', 'x' }, '<C-x>', function() require('opencode').select() end, { desc = 'Select OpenCode…' })
+      vim.keymap.set({ 'n', 'x' }, '<Space>x', function() require('opencode').select() end, { desc = 'Select OpenCode…' })
       vim.keymap.set({ 'n', 'x' }, 'go', function() return require('opencode').operator '@this' end, { desc = 'Send range to OpenCode', expr = true })
       vim.keymap.set({ 'n' }, 'goo', function() return require('opencode').operator '@this' .. '_' end, { desc = 'Send line to OpenCode', expr = true })
     end,
