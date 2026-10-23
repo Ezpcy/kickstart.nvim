@@ -111,46 +111,48 @@ return {
         },
       }
     end,
-  }, -- 4) Copilot
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup {
-        panel = { enabled = true },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          keymap = {
-            accept = '<C-a>',
-            accept_word = '<S-Tab>',
-            next = '<C-g>',
-            prev = '<C-e>',
-          },
-        },
-        filetypes = {
-          yml = true,
-          yaml = true,
-          markdown = true,
-        },
-      }
-    end,
-  },
+  }, 
 
-  {
-    'zbirenbaum/copilot-cmp',
-    after = { 'copilot.lua' },
-    suggestion = { enabled = true },
-    config = function()
-      require('copilot_cmp').setup {
-        suggestion = { enabled = true },
-        panel = { enabled = true },
-      }
-    end,
-  },
-
-  -- 5) nvim-ufo (Folding)
+  -- 4) Copilot
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require('copilot').setup {
+  --       panel = { enabled = true },
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         keymap = {
+  --           accept = '<C-a>',
+  --           accept_word = '<S-Tab>',
+  --           next = '<C-g>',
+  --           prev = '<C-e>',
+  --         },
+  --       },
+  --       filetypes = {
+  --         yml = true,
+  --         yaml = true,
+  --         markdown = true,
+  --       },
+  --     }
+  --   end,
+  -- },
+  --
+  -- {
+  --   'zbirenbaum/copilot-cmp',
+  --   after = { 'copilot.lua' },
+  --   suggestion = { enabled = true },
+  --   config = function()
+  --     require('copilot_cmp').setup {
+  --       suggestion = { enabled = true },
+  --       panel = { enabled = true },
+  --     }
+  --   end,
+  -- },
+  --
+  -- -- 5) nvim-ufo (Folding)
   {
     'kevinhwang91/nvim-ufo',
     dependencies = { 'kevinhwang91/promise-async' },

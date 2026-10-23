@@ -979,9 +979,9 @@ require 'config.lsp'
 require 'custom.keybinds'
 
 -- Disable copilot at startup
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function() vim.cmd 'Copilot disable' end,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function() vim.cmd 'Copilot disable' end,
+-- })
 
 -- Multi Line
 pcall(vim.api.nvim_del_keymap, 'n', '<C-N>')
