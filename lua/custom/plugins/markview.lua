@@ -1,7 +1,6 @@
 return {
   {
     'OXY2DEV/markview.nvim',
-    dependencies = { 'slugbyte/lackluster.nvim' },
     lazy = false,
     config = function()
       local presets = require 'markview.presets'
@@ -34,10 +33,6 @@ return {
         },
       }
 
-      -- 3. MANUAL OVERRIDE (The "Nuclear" Option)
-      -- If the text is still unreadable, run these to force Lackluster-friendly colors
-      vim.api.nvim_set_hl(0, 'MarkviewCode', { bg = '#111111' })
-      vim.api.nvim_set_hl(0, 'MarkviewInlineCode', { bg = '#111111' })
     end,
   },
 }

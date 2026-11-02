@@ -12,16 +12,16 @@ local transparent = vim.g.transparent_window ~= false
 
 local c = {
   bg = '#000000',
-  float = '#080808', -- popups, like the panel cards
-  raised = '#0f0f0f', -- cursor line, folds
-  hover = '#202124',
+  float = '#060606', -- popups, like the panel cards
+  raised = '#0b0b0b', -- cursor line, folds
+  hover = '#141414',
   border = '#0f2e2e',
   pill = '#0e3b38',
   select = '#155852', -- selection, like the active workspace pill
-  fg = '#ebedf0',
-  dim = '#8b8e94',
-  faint = '#4a4d52',
-  comment = '#6b6e74',
+  fg = '#d2d9d7',
+  dim = '#86948f',
+  faint = '#46524f',
+  comment = '#66746f',
   teal = '#29a99e', -- accent
   teal_hi = '#3cc4b6',
   mint = '#9fd8cf', -- functions
@@ -55,7 +55,7 @@ local hl = {
   Folded = { fg = c.dim, bg = c.raised },
   EndOfBuffer = { fg = c.bg },
   NonText = { fg = c.faint },
-  Whitespace = { fg = '#1c1e21' },
+  Whitespace = { fg = '#101010' },
   SpecialKey = { fg = c.faint },
   Visual = { bg = c.select },
   VisualNOS = { bg = c.pill },
@@ -99,7 +99,7 @@ local hl = {
 
   -- ── Syntax ──
   Comment = { fg = c.comment, italic = true },
-  Constant = { fg = '#c9ced4' },
+  Constant = { fg = '#c4d0cd' },
   String = { fg = c.sand },
   Character = { fg = c.sand },
   Number = { fg = c.amber },
@@ -138,10 +138,10 @@ local hl = {
   -- ── Treesitter ──
   ['@variable'] = { fg = c.fg },
   ['@variable.builtin'] = { fg = c.teal_hi },
-  ['@variable.parameter'] = { fg = '#d3d6db', italic = true },
-  ['@variable.member'] = { fg = '#c9ced4' },
-  ['@property'] = { fg = '#c9ced4' },
-  ['@constant'] = { fg = '#c9ced4' }, -- UPPER_CASE names: quiet; literals stay amber
+  ['@variable.parameter'] = { fg = '#cfd9d6', italic = true },
+  ['@variable.member'] = { fg = '#c4d0cd' },
+  ['@property'] = { fg = '#c4d0cd' },
+  ['@constant'] = { fg = '#c4d0cd' }, -- UPPER_CASE names: quiet; literals stay amber
   ['@constant.builtin'] = { fg = c.amber },
   ['@module'] = { fg = c.sage },
   ['@label'] = { fg = c.teal },
@@ -257,9 +257,9 @@ local hl = {
   WhichKeySeparator = { fg = c.faint },
   WhichKeyNormal = { bg = c.float },
   WhichKeyBorder = { link = 'FloatBorder' },
-  IblIndent = { fg = '#16181b' },
+  IblIndent = { fg = '#0e0e0e' },
   IblScope = { fg = c.border },
-  SnacksIndent = { fg = '#16181b' },
+  SnacksIndent = { fg = '#0e0e0e' },
   SnacksIndentScope = { fg = c.border },
   SnacksDashboardHeader = { fg = c.teal },
   SnacksDashboardKey = { fg = c.teal_hi },

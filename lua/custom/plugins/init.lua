@@ -111,7 +111,7 @@ return {
         },
       }
     end,
-  }, 
+  },
 
   -- 4) Copilot
   -- {
@@ -351,6 +351,5 @@ return {
 
   require 'custom.plugins.television',
   require 'custom.plugins.claude',
-  require 'custom.plugins.lackluster',
   -- require 'custom.plugins.avant',
 }
