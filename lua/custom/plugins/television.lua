@@ -1,6 +1,7 @@
 return {
   {
     "alexpasmantier/tv.nvim",
+    event = "VeryLazy",
     config = function()
       -- built-in niceties
       local h = require("tv").handlers

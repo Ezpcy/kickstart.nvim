@@ -53,6 +53,7 @@ return {
   {
     'saecki/crates.nvim',
     version = 'v0.3.0',
+    event = { 'BufRead Cargo.toml' },
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('crates').setup {
@@ -66,10 +67,7 @@ return {
   },
 
   -- 3) Additional UI / Utility
-  {
-    'j-hui/fidget.nvim',
-    config = function() require('fidget').setup() end,
-  },
+  -- (fidget.nvim is configured as an nvim-lspconfig dependency in init.lua)
   {
     'mattn/emmet-vim',
     dependencies = {
@@ -176,11 +174,13 @@ return {
   {
     'mfussenegger/nvim-dap-python',
     dependencies = { 'nvim-dap' },
+    ft = 'python',
   },
 
   {
     'akinsho/toggleterm.nvim',
     version = '*',
+    cmd = { 'ToggleTerm', 'TermExec', 'ToggleTermToggleAll' },
     config = function()
       require('toggleterm').setup {
         direction = 'float', -- Floating terminal
@@ -197,24 +197,17 @@ return {
 
   { 'mg979/vim-visual-multi' },
 
-  {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
-      'hrsh7th/cmp-buffer', -- Buffer source for nvim-cmp
-      'hrsh7th/cmp-path', -- Path completions
-      'hrsh7th/cmp-cmdline', -- Cmdline completions
-      -- any other sources you want
-    },
-    event = 'InsertEnter',
-    config = function() require('cmp').setup {} end,
-  },
-
   -- { 'mfussenegger/nvim-jdtls', ft = 'java', dependencies = { 'nvim-dap' } },
 
-  { 'tpope/vim-fugitive' },
+  {
+    'tpope/vim-fugitive',
+    cmd = { 'G', 'Git', 'Gclog', 'Gllog', 'Gdiffsplit', 'Gvdiffsplit', 'Ghdiffsplit', 'Gread', 'Gwrite', 'Gedit', 'GBrowse', 'GMove', 'GRename', 'GDelete' },
+  },
 
-  { 'sindrets/diffview.nvim' },
+  {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh', 'DiffviewFileHistory' },
+  },
 
   {
     'folke/flash.nvim',
@@ -226,7 +219,7 @@ return {
       { "ä", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
       { "è", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       { "ü", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "è", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "à", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-ä>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
@@ -240,6 +233,7 @@ return {
   {
 
     '3rd/image.nvim',
+    ft = { 'markdown' },
     build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
     opts = {
       processor = 'magick_cli',
@@ -332,6 +326,7 @@ return {
   },
   {
     'nickjvandyke/opencode.nvim',
+    event = 'VeryLazy',
     -- Defaults to "main", supporting OpenCode v2.
     -- Uncomment to pull the latest stable release, supporting OpenCode v1.
     -- version = "*",
@@ -347,6 +342,49 @@ return {
       vim.keymap.set({ 'n', 'x' }, 'go', function() return require('opencode').operator '@this' end, { desc = 'Send range to OpenCode', expr = true })
       vim.keymap.set({ 'n' }, 'goo', function() return require('opencode').operator '@this' .. '_' end, { desc = 'Send line to OpenCode', expr = true })
     end,
+  },
+  {
+    'obsidian-nvim/obsidian.nvim',
+    version = '*', -- use latest release, remove to use latest commit
+    ft = 'markdown',
+    cmd = 'Obsidian', -- also load when running :Obsidian from a non-Markdown buffer
+    ---@module 'obsidian'
+    ---@type obsidian.config
+    opts = {
+      ui = {
+        enable = false,
+      },
+      legacy_commands = false, -- this will be removed in 4.0.0
+      workspaces = {
+        {
+          name = 'personal',
+          path = '~/ObsidianVault',
+        },
+      },
+      frontmatter = { enabled = false },
+      note_id_func = function(title) return title or os.date '%Y%m%d%H%M' end,
+      templates = { folder = '_templates/nvim', date_format = 'DD.MM.YYYY' },
+      note = { template = 'default.md' },
+      daily_notes = {
+        folder = '02-Areas/Journal',
+        date_format = 'YYYY/MM/DD ddd',
+        template = 'daily.md',
+        default_tags = {},
+        workdays_only = false,
+      },
+      attachments = {
+        folder = "./x_ressources"
+      }
+    },
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
   },
 
   require 'custom.plugins.television',

@@ -13,66 +13,20 @@
 --   ensure_installed = { "denols", "tsserver", "rust_analyzer", ... }
 -- }
 
----------------------------------
--- Rust Tools Setup
----------------------------------
-local mason_path = vim.fn.stdpath 'data' .. '/mason/'
-local codelldb_path = mason_path .. 'bin/codelldb'
-local liblldb_path = mason_path .. 'packages/codelldb/extension/lldb/lib/liblldb'
-local this_os = vim.loop.os_uname().sysname
-if this_os:find 'Windows' then
-  codelldb_path = mason_path .. 'packages\\codelldb\\extension\\adapter\\codelldb.exe'
-  liblldb_path = mason_path .. 'packages\\codelldb\\extension\\lldb\\bin\\liblldb.dll'
-else
-  liblldb_path = liblldb_path .. (this_os == 'Linux' and '.so' or '.dylib')
-end
-
-local rt_status_ok, rust_tools = pcall(require, 'rust-tools')
-if rt_status_ok then
-  rust_tools.setup {
-    tools = {
-      executor = require('rust-tools/executors').termopen,
-      reload_workspace_from_cargo_toml = true,
-      runnables = { use_telescope = true },
-      inlay_hints = {
-        auto = true,
-        show_parameter_hints = true,
-        parameter_hints_prefix = '<-',
-        other_hints_prefix = '=>',
-      },
-    },
-    dap = {
-      adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
-    },
-    server = {
-      on_attach = function(client, bufnr)
-        -- typical on_attach code here
-      end,
-      settings = {
-        ['rust-analyzer'] = {
-          lens = { enable = true },
-          checkOnSave = { enable = true, command = 'clippy' },
-        },
-      },
-    },
-  }
-end
+-- (rust-tools.nvim removed: plugin not installed and archived upstream; rust_analyzer is auto-enabled by mason-lspconfig)
 
 vim.g.markdown_fenced_languages = {}
 
 -- Using vim.lsp.config instead of deprecated lspconfig
 
 vim.lsp.config('denols', {
-  on_attach = on_attach,
-  root_dir = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }),
-  single_file_support = false,
+  root_markers = { 'deno.json', 'deno.jsonc' },
 })
 
 vim.lsp.config('htmx', {
   cmd = { 'htmx-lsp' }, -- from Mason or PATH
   filetypes = { 'html', 'htmldjango', 'templ', 'php', 'blade', 'twig', 'eex', 'heex', 'vue', 'svelte', 'astro', 'mdx' },
-  single_file_support = true,
-  root_dir = vim.fs.root(0, { '.git', 'index.html' }),
+  root_markers = { '.git', 'index.html' },
 })
 
 -- vim.lsp.config('ts_ls', {
@@ -104,5 +58,5 @@ vim.lsp.config('jdtls', {
 })
 
 vim.lsp.config('tinymist', {
-  root_dir = vim.fs.root(0, { 'main.typ', '.git' })
+  root_markers = { 'main.typ', '.git' },
 })

@@ -92,6 +92,10 @@ vim.o.signcolumn = 'yes'
 -- Decrease update time
 vim.o.updatetime = 250
 
+-- Source a trusted `.nvim.lua` from the directory Neovim is started in (per-project config,
+-- e.g. enabling ltex_plus). Neovim asks once before trusting a new or changed file.
+vim.o.exrc = true
+
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 250
 
@@ -216,7 +220,7 @@ rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
-require('lazy').setup {
+require('lazy').setup({
   require 'custom.plugins.init',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.debug',
@@ -224,16 +228,6 @@ require('lazy').setup {
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns',
   require 'kickstart.plugins.autopairs',
-  dependencies = {
-    'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-    'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-  },
-  opts = {
-    -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-    -- animation = true,
-    -- insert_at_start = true,
-    -- …etc.
-  },
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
@@ -473,7 +467,7 @@ require('lazy').setup {
       --  must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         opts = {
           registries = {
             'github:mason-org/mason-registry',
@@ -482,7 +476,6 @@ require('lazy').setup {
           },
         },
       },
-      'williamboman/mason-lspconfig.nvim',
       -- Maps LSP server names between nvim-lspconfig and Mason package names.
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -602,36 +595,8 @@ require('lazy').setup {
 
         -- Special Lua Config, as recommended by neovim help docs
         lua_ls = {
-          on_init = function(client)
-            client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
-
-            if client.workspace_folders then
-              local path = client.workspace_folders[1].name
-              if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
-            end
-
-            client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-              runtime = {
-                version = 'LuaJIT',
-                path = { 'lua/?.lua', 'lua/?/init.lua' },
-              },
-              workspace = {
-                checkThirdParty = false,
-                -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-                --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-                library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
-                  '${3rd}/luv/library',
-                  '${3rd}/busted/library',
-                }),
-              },
-            })
-          end,
-          ---@type lspconfig.settings.lua_ls
-          settings = {
-            Lua = {
-              format = { enable = false }, -- Disable formatting (formatting is done by stylua)
-            },
-          },
+          on_init = function(client) client.server_capabilities.documentFormattingProvider = false end,
+          settings = { Lua = { format = { enable = false } } },
         },
       }
 
@@ -657,16 +622,11 @@ require('lazy').setup {
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            vim.lsp.config(server_name, server)
-          end,
-        },
+        -- Every Mason-installed server is auto-enabled, except these.
+        -- Enable them per project in a `.nvim.lua` (see `vim.o.exrc` below), e.g.:
+        --   vim.lsp.config('ltex_plus', { settings = { ltex = { language = 'de-CH' } } })
+        --   vim.lsp.enable('ltex_plus')
+        automatic_enable = { exclude = { 'ltex_plus' } },
       }
     end,
   },
@@ -721,7 +681,6 @@ require('lazy').setup {
     event = 'VimEnter',
     version = '1.*',
     dependencies = {
-      'Kaiser-Yang/blink-cmp-avante',
       -- Snippet Engine
       {
         'L3MON4D3/LuaSnip',
@@ -774,8 +733,10 @@ require('lazy').setup {
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
 
-        ['<C-f'] = {'scroll_documentation_up', 'fallback'},
-        ['<C-b'] = {'scroll_documentation_down', 'fallback'},
+        -- Scroll the docs window. Not <C-b>: tmux uses <C-b> as its prefix, so it never reaches Neovim.
+        -- 'fallback' keeps insert-mode <C-u> (delete to line start) / <C-d> (de-indent) when no docs are open.
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
@@ -793,19 +754,7 @@ require('lazy').setup {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'avante' },
-
-        per_filetype = {
-          ['AvanteInput'] = { 'avante' }, -- only avante, drops path/lsp/snippets
-        },
-
-        providers = {
-          avante = {
-            module = 'blink-cmp-avante',
-            name = 'Avante',
-            opts = {},
-          },
-        },
+        default = { 'lsp', 'path', 'snippets' },
       },
 
       snippets = { preset = 'luasnip' },
@@ -817,7 +766,7 @@ require('lazy').setup {
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
@@ -951,6 +900,7 @@ require('lazy').setup {
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+}, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -970,7 +920,7 @@ require('lazy').setup {
       lazy = '💤 ',
     },
   },
-}
+})
 
 vim.cmd.colorscheme 'main-theme'
 
@@ -993,6 +943,6 @@ vim.api.nvim_set_keymap('x', '<C-s>', '<Plug>(VM-Find-Under)', { noremap = true,
 
 vim.g.VM_maps = {
   ['Find Next'] = '<C-]>', -- Move to next cursor using Ctrl-]
-  ['Find Prev'] = '<C-[>', -- Move to previous cursor using Ctrl-[
+  -- (no Find Prev on <C-[>: terminals send <C-[> as <Esc>; VM's default `N` still works)
   ['Mouse Cursor'] = '<C-r-RightMouse>',
 }

@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = 'en,de'
-    vim.opt_local.spellfile = '~/.config/lvim/spell/de.utf-8.add'
+    vim.opt_local.spellfile = '~/.config/nvim/spell/de.utf-8.add'
   end,
 })
 

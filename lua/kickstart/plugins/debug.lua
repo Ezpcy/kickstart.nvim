@@ -43,12 +43,10 @@ return {
     ---------------------------------
     -- DAP Configuration Examples
     ---------------------------------
-    -- 1) C++ with lldb-vscode
-    local dap = require 'dap'
-
+    -- 1) C++ with lldb-dap (from the `lldb` package)
     dap.adapters.lldb = {
       type = 'executable',
-      command = '/run/current-system/sw/bin/lldb-vscode', -- Adjust your lldb path
+      command = 'lldb-dap', -- needs `pacman -S lldb` (not installed yet)
       name = 'lldb',
     }
     dap.configurations.cpp = {
