@@ -231,13 +231,12 @@ return {
     config = function() require('window-picker').setup() end,
   },
   {
-
     '3rd/image.nvim',
-    ft = { 'markdown' },
-    build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+    build = false,
     opts = {
       processor = 'magick_cli',
       window_overlap_clear_enabled = true,
+      tmux_show_only_in_active_window = true,
     },
   },
   -- {
@@ -373,8 +372,8 @@ return {
         workdays_only = false,
       },
       attachments = {
-        folder = "./x_ressources"
-      }
+        folder = './x_ressources',
+      },
     },
   },
   {
