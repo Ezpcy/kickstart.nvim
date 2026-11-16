@@ -318,10 +318,8 @@ return {
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {
       file_types = { 'markdown' },
-      -- 'Avante' },
     },
     ft = { 'markdown' },
-    -- 'Avante' },
   },
   {
     'nickjvandyke/opencode.nvim',
@@ -388,5 +386,4 @@ return {
 
   require 'custom.plugins.television',
   require 'custom.plugins.claude',
-  -- require 'custom.plugins.avant',
 }
