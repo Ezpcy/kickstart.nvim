@@ -350,6 +350,7 @@ return {
     },
   },
 
+  require 'custom.plugins.yazi',
   require 'custom.plugins.television',
   require 'custom.plugins.claude',
   require 'custom.plugins.obsidian'
