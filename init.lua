@@ -614,9 +614,19 @@ require('lazy').setup({
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      for name, server in pairs(servers) do
-        vim.lsp.config(name, server)
-        vim.lsp.enable(name)
+      -- Check first if nvim is running on an Android device. Since Mason doesn't
+      -- support Android, we need to exclude the lua lsp and start the one which should
+      -- be installed from the repository
+      local is_termux = (vim.env.PREFIX or ''):find 'com.termux' ~= nil
+
+      if not is_termux then
+        for name, server in pairs(servers) do
+          vim.lsp.config(name, server)
+          vim.lsp.enable(name)
+        end
+      else
+        local native_only = { 'lua_ls', 'clangd', 'rust_analyzer' }
+        vim.lsp.enable(native_only)
       end
 
       require('mason-lspconfig').setup {
